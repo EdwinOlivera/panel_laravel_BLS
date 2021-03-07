@@ -1,0 +1,32 @@
+[02-Sep-2020 19:02:42 UTC] PHP Warning:  Unknown: Input variables exceeded 1000. To increase the limit change max_input_vars in php.ini. in Unknown on line 0
+[02-Sep-2020 19:07:00 UTC] PHP Warning:  Unknown: Input variables exceeded 1000. To increase the limit change max_input_vars in php.ini. in Unknown on line 0
+[02-Sep-2020 19:07:44 UTC] PHP Warning:  Unknown: Input variables exceeded 1000. To increase the limit change max_input_vars in php.ini. in Unknown on line 0
+[09-Sep-2020 04:19:46 UTC] PHP Fatal error:  Uncaught Error: Class 'ComposerAutoloaderInit6dc24fae20caa22311c7f26e01e00501' not found in /home/bluelit1/public_html/liondelivery/vendor/autoload.php:7
+Stack trace:
+#0 /home/bluelit1/public_html/liondelivery/public/index.php(26): require()
+#1 {main}
+  thrown in /home/bluelit1/public_html/liondelivery/vendor/autoload.php on line 7
+[09-Sep-2020 04:20:18 UTC] PHP Fatal error:  Uncaught Error: Class 'ComposerAutoloaderInit6dc24fae20caa22311c7f26e01e00501' not found in /home/bluelit1/public_html/liondelivery/vendor/autoload.php:7
+Stack trace:
+#0 /home/bluelit1/public_html/liondelivery/public/index.php(26): require()
+#1 {main}
+  thrown in /home/bluelit1/public_html/liondelivery/vendor/autoload.php on line 7
+[09-Sep-2020 04:20:50 UTC] PHP Fatal error:  Uncaught Error: Class 'ComposerAutoloaderInit6dc24fae20caa22311c7f26e01e00501' not found in /home/bluelit1/public_html/liondelivery/vendor/autoload.php:7
+Stack trace:
+#0 /home/bluelit1/public_html/liondelivery/public/index.php(26): require()
+#1 {main}
+  thrown in /home/bluelit1/public_html/liondelivery/vendor/autoload.php on line 7
+[11-Sep-2020 00:49:42 UTC] PHP Warning:  Unknown: Input variables exceeded 1000. To increase the limit change max_input_vars in php.ini. in Unknown on line 0
+[11-Sep-2020 00:50:05 UTC] PHP Warning:  Unknown: Input variables exceeded 1000. To increase the limit change max_input_vars in php.ini. in Unknown on line 0
+[11-Sep-2020 00:50:53 UTC] PHP Warning:  Unknown: Input variables exceeded 1000. To increase the limit change max_input_vars in php.ini. in Unknown on line 0
+[11-Sep-2020 00:52:24 UTC] PHP Warning:  Unknown: Input variables exceeded 1000. To increase the limit change max_input_vars in php.ini. in Unknown on line 0
+[11-Sep-2020 19:31:23 UTC] PHP Warning:  Unknown: Input variables exceeded 1000. To increase the limit change max_input_vars in php.ini. in Unknown on line 0
+[11-Sep-2020 19:32:11 UTC] PHP Warning:  Unknown: Input variables exceeded 1000. To increase the limit change max_input_vars in php.ini. in Unknown on line 0
+[19-Sep-2020 00:39:00 UTC] PHP Warning:  Unknown: Input variables exceeded 1000. To increase the limit change max_input_vars in php.ini. in Unknown on line 0
+[03-Nov-2020 17:40:13 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/php_fileinfo.dll' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/php_fileinfo.dll: cannot open shared object file: No such file or directory in Unknown on line 0
+[03-Nov-2020 17:40:13 UTC] PHP Parse error:  syntax error, unexpected ':', expecting '{' in /home/bluelit1/public_html/liondelivery/vendor/symfony/polyfill-php80/bootstrap.php on line 23
+[03-Nov-2020 17:51:38 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php56/root/usr/lib64/php/modules/php_fileinfo.dll' - /opt/cpanel/ea-php56/root/usr/lib64/php/modules/php_fileinfo.dll: cannot open shared object file: No such file or directory in Unknown on line 0
+[03-Nov-2020 17:51:38 UTC] PHP Parse error:  syntax error, unexpected ':', expecting '{' in /home/bluelit1/public_html/liondelivery/vendor/symfony/polyfill-php80/bootstrap.php on line 23
+[29-Nov-2020 04:45:43 UTC] PHP Fatal error:  Class App\Http\Controllers\FACController contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (App\Http\Controllers\ParentOrderController::__init) in /home/bluelit1/public_html/liondelivery/app/Http/Controllers/FACController.php on line 19
+[29-Nov-2020 04:45:51 UTC] PHP Fatal error:  Class App\Http\Controllers\FACController contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (App\Http\Controllers\ParentOrderController::__init) in /home/bluelit1/public_html/liondelivery/app/Http/Controllers/FACController.php on line 19
+[29-Nov-2020 04:46:03 UTC] PHP Fatal error:  Class App\Http\Controllers\FACController contains 1 abstract method and must therefore be declared abstract or implement the remaining methods (App\Http\Controllers\ParentOrderController::__init) in /home/bluelit1/public_html/liondelivery/app/Http/Controllers/FACController.php on line 19
