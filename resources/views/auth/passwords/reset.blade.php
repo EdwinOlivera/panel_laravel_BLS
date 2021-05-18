@@ -9,7 +9,7 @@
             <input type="hidden" name="token" value="{{ $token }}">
 
             <div class="input-group mb-3">
-                <input value="{{ old('email') }}" type="email" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" placeholder="{{__('auth.email')}}" aria-label="{{__('auth.email')}}">
+                <input value="{{ old('email') }}" type="email" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }} col-9" name="email" placeholder="{{__('auth.email')}}"aria-label="{{__('auth.email')}}">
                 <div class="input-group-append">
                     <span class="input-group-text"><i class="fa fa-envelope"></i></span>
                 </div>
@@ -19,9 +19,10 @@
                     </div>
                 @endif
             </div>
+            
 
             <div class="input-group mb-3">
-                <input value="{{ old('password') }}" type="password" class="form-control  {{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="{{__('auth.password')}}" aria-label="{{__('auth.password')}}">
+                <input value="{{ old('password') }}" type="password" class="form-control  {{ $errors->has('password') ? ' is-invalid' : '' }}col-9" name="password" placeholder="{{__('auth.password')}}" aria-label="{{__('auth.password')}}">
                 <div class="input-group-append">
                     <span class="input-group-text"><i class="fa fa-lock"></i></span>
                 </div>
@@ -33,7 +34,7 @@
             </div>
 
             <div class="input-group mb-3">
-                <input value="{{ old('password_confirmation') }}" type="password" class="form-control  {{ $errors->has('password_confirmation') ? ' is-invalid' : '' }}" name="password_confirmation" placeholder="{{__('auth.password_confirmation')}}" aria-label="{{__('auth.password_confirmation')}}">
+                <input value="{{ old('password_confirmation') }}" type="password" class="form-control  {{ $errors->has('password_confirmation') ? ' is-invalid' : '' }}col-9" name="password_confirmation" placeholder="{{__('auth.password_confirmation')}}" aria-label="{{__('auth.password_confirmation')}}">
                 <div class="input-group-append">
                     <span class="input-group-text"><i class="fa fa-lock"></i></span>
                 </div>
@@ -44,8 +45,9 @@
                 @endif
             </div>
 
-            <div class="row mb-2">
-                <div class="col-4 ml-auto">
+            <div class="row mb-2 mr-4">
+                {{-- <div class="col-9 ml-auto"> --}}
+                    <div class="col-4 ">
                     <button type="submit" class="btn btn-primary btn-block">{{__('auth.reset_password')}}</button>
                 </div>
                 <!-- /.col -->

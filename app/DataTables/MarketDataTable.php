@@ -133,16 +133,16 @@ class MarketDataTable extends DataTable
                 'title' => trans('lang.market_address'),
 
             ],
-            [
-                'data' => 'phone',
-                'title' => trans('lang.market_phone'),
+            // [
+            //     'data' => 'phone',
+            //     'title' => trans('lang.market_phone'),
 
-            ],
-            [
-                'data' => 'mobile',
-                'title' => trans('lang.market_mobile'),
+            // ],
+            // [
+            //     'data' => 'mobile',
+            //     'title' => trans('lang.market_mobile'),
 
-            ],
+            // ],
             [
                 'data' => 'available_for_delivery',
                 'title' => trans('lang.market_available_for_delivery'),

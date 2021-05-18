@@ -150,24 +150,42 @@
     </div>
 
     <!-- Category Id Field -->
-    <div class="form-group row ">
+    {{-- <div class="form-group row ">
         {!! Form::label('category_id', trans("lang.product_category_id"),['class' => 'col-3 control-label text-right']) !!}
         <div class="col-9">
             {!! Form::select('category_id', $category, null, ['class' => 'select2 form-control']) !!}
             <div class="form-text text-muted">{{ trans("lang.product_category_id_help") }}</div>
         </div>
+    </div> --}}
+    <!-- Categories Field -->
+    <div class="form-group row ">
+        {!! Form::label('categories[]', trans("lang.product_categories_id"),['class' => 'col-3 control-label text-right']) !!}
+        <div class="col-9">
+            {!! Form::select('categories[]', $category, $categoriesSelected, ['class' => 'select2 form-control', 'multiple'=>'multiple']) !!}
+            <div class="form-text text-muted">{{ trans("lang.product_categories_id_help") }}</div>
+        </div>
     </div>
 
-    <!-- 'Boolean Featured Field' -->
+    @if(!$isNormal)
+    <!-- Subdepartment Id Field -->
     <div class="form-group row ">
-        {!! Form::label('featured', trans("lang.product_featured"),['class' => 'col-3 control-label text-right']) !!}
+        {!! Form::label('categories[]', trans("lang.subdepartment"),['class' => 'col-3 control-label text-right']) !!}
+        <div class="col-9">
+            {!! Form::select('subdepartment_id', $subparments, null, ['class' => 'select2 form-control']) !!}
+            <div class="form-text text-muted">{{ trans("lang.product_category_id_help") }}</div>
+        </div>
+    </div>
+    @endif
+    <!-- 'Boolean Featured Field' -->
+    {{-- <div class="form-group row ">
+        {!! Form::label('featured', trans("Disponible"),['class' => 'col-3 control-label text-right']) !!}
         <div class="checkbox icheck">
             <label class="col-9 ml-2 form-check-inline">
                 {!! Form::hidden('featured', 0) !!}
                 {!! Form::checkbox('featured', 1, null) !!}
             </label>
         </div>
-    </div>
+    </div> --}}
 
     <!-- 'Boolean deliverable Field' -->
     <div class="form-group row ">

@@ -62,7 +62,14 @@ class MarketRepository extends BaseRepository implements CacheableInterface
     {
         return Market::join("user_markets", "market_id", "=", "markets.id")
             ->where('user_markets.user_id', auth()->id())
-            ->where('markets.active','=','1')->get();
+            ->where('markets.active', '=', '1')->get();
+    }
+    public function myActiveSupermarket()
+    {
+        return Market::join("user_markets", "market_id", "=", "markets.id")
+            ->where('user_markets.user_id', auth()->id())
+            ->where('type_market_id', '=', '3')
+            ->where('markets.active', '=', '1')->get();
     }
 
 }

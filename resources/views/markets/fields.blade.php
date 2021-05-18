@@ -12,6 +12,15 @@
             </div>
         </div>
     </div>
+    <!-- Type Market Field -->
+    <div class="form-group row ">
+        {!! Form::label('type_market_id', trans('Tipo'), ['class' => 'col-3 control-label
+        text-right']) !!}
+        <div class="col-9">
+            {!! Form::select('type_market_id', $typeMarket, null, ['class' => 'select2 form-control']) !!}
+            <div class="form-text text-muted">{{ trans('Seleccione el tipo de este establecimiento') }}</div>
+        </div>
+    </div>
 
     <!-- fields Field -->
     <div class="form-group row ">
@@ -35,17 +44,18 @@
     <div class="form-group row ">
         {!! Form::label('delivery_fee', trans("lang.market_delivery_fee"), ['class' => 'col-3 control-label text-right']) !!}
         <div class="col-9">
-            {!! Form::number('delivery_fee', null,  ['class' => 'form-control','step'=>'any','placeholder'=>  trans("lang.market_delivery_fee_placeholder")]) !!}
+            {!! Form::number('delivery_fee', null,  ['class' => 'form-control', 'min=0' ,'step'=>'any','placeholder'=>  trans("lang.market_delivery_fee_placeholder")]) !!}
             <div class="form-text text-muted">
                 {{ trans("lang.market_delivery_fee_help") }}
             </div>
         </div>
     </div>
-{{-- distance_per_extra --}}
+
+    {{-- distance_per_extra --}}
     <div class="form-group row ">
         {!! Form::label('distance_per_extra', trans("lang.distance_per_extra"), ['class' => 'col-3 control-label text-right']) !!}
         <div class="col-9">
-            {!! Form::number('distance_per_extra', null,  ['class' => 'form-control',"min = 3",'step'=>'any','placeholder'=>  trans("lang.distance_per_extra_placeholder")]) !!}
+            {!! Form::number('distance_per_extra', null,  ['class' => 'form-control',"min = 0",'step'=>'any','placeholder'=>  trans("lang.distance_per_extra_placeholder")]) !!}
             <div class="form-text text-muted">
                 {{ trans("lang.distance_per_extra_help") }}
             </div>
@@ -61,16 +71,16 @@
             </div>
         </div>
     </div>
-    <!-- delivery_range Field -->
+    {{-- <!-- delivery_range Field -->
     <div class="form-group row ">
         {!! Form::label('delivery_range', trans("lang.market_delivery_range"), ['class' => 'col-3 control-label text-right']) !!}
         <div class="col-9">
-            {!! Form::number('delivery_range', null,  ['class' => 'form-control', "min = 100",'step'=>'any','placeholder'=>  trans("lang.market_delivery_range_placeholder")]) !!}
+            {!! Form::number('delivery_range', null,  ['class' => 'form-control', "min = 0",'step'=>'any','placeholder'=>  trans("lang.market_delivery_range_placeholder")]) !!}
             <div class="form-text text-muted">
                 {{ trans("lang.market_delivery_range_help") }}
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <!-- default_tax Field -->
     <div class="form-group row ">
@@ -141,7 +151,7 @@
     </div>
     <!-- 'Boolean closed Field' -->
     <div class="form-group row ">
-        {!! Form::label('closed', trans("lang.market_closed"),['class' => 'col-5 control-label text-right']) !!}
+        {!! Form::label('closed', trans("lang.market_closed"),['class' => 'col-3 control-label text-right']) !!}
         <div class="checkbox icheck">
             <label class="col-9 ml-2 form-check-inline">
                 {!! Form::hidden('closed', 0) !!}
@@ -168,6 +178,17 @@
                 {!! Form::hidden('enable_extra_amount', 0) !!}
                 {!! Form::checkbox('enable_extra_amount', 1, null) !!}
             </label>
+        </div>
+    </div>
+
+    <!-- Message closed Field -->
+    <div class="form-group row ">
+        {!! Form::label('message_closed', trans("Mensaje al estar cerrado"), ['class' => 'col-3 control-label text-right']) !!}
+        <div class="">
+            {!! Form::text('message_closed', null,  ['class' => 'form-control','placeholder'=>  trans("En estos momentos estamos cerrados. El día de mañana tomaremos tu pedido con mucho gusto.")]) !!}
+            <div class="form-text text-muted">
+                {{ trans("Mensaje que se mostrara cuando este cerrado el establecimiento") }}
+            </div>
         </div>
     </div>
 </div>
@@ -250,6 +271,74 @@
         </div>
     </div>
 
+        <!-- time_to_open Field -->
+        <div class="form-group row ">
+            {!! Form::label('hour_open', trans("Hora de Apertura"), ['class' => 'col-3 control-label text-right']) !!}
+            <div class="col-6">
+                {!! Form::time('hour_open', null,  ['class' => 'form-control', "min" => "01:00", "max" => "12:00" ,'step'=>'300','placeholder'=>  trans("7 = 7 am/pm")]) !!}
+                <div class="form-text text-muted">
+                    {{ trans("Ingresar la hora de apertura") }}
+                </div>
+
+            </div>
+
+             <!-- 'Boolean open_pm Field' -->
+             {!! Form::label('open_pm', trans("pm"),['class' => 'col-1 control-label text-right']) !!}
+            <div class="form-group row ">
+                <div class="checkbox icheck">
+                    <label class="col-9 ml-2 form-check-inline">
+                        {!! Form::hidden('open_pm', 0) !!}
+                        {!! Form::checkbox('open_pm', 0, null) !!}
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- time_to_close Field -->
+        <div class="form-group row ">
+            {!! Form::label('hour_close', trans("Hora de Cierre"), ['class' => 'col-3 control-label text-right']) !!}
+            <div class="col-6">
+                {!! Form::time('hour_close', null,  ['class' => 'form-control', "min" => "01:00", "max" => "12:00" ,'step'=>'300' ,'placeholder'=>  trans("7 = 7 am/pm")]) !!}
+                {{-- <input id="hour_close" name="hour_close" class="form-control" type="time"  min="01:00" max="12:00" step="600"> --}}
+                <div class="form-text text-muted">
+                    {{ trans("Ingresar la hora de Cierre") }}
+                </div>
+
+            </div>
+
+             <!-- 'Boolean close_pm Field' -->
+             {!! Form::label('close_pm', trans("pm"),['class' => 'col-1 control-label text-right']) !!}
+            <div class="form-group row ">
+                <div class="checkbox icheck">
+                    <label class="col-9 ml-2 form-check-inline">
+                        {!! Form::hidden('close_pm', 0) !!}
+                        {!! Form::checkbox('close_pm', 1, null) !!}
+                    </label>
+                </div>
+            </div>
+        </div>
+
+         <!-- estimated_time Field -->
+         <div class="form-group row ">
+            {!! Form::label('estimated_time', trans("Tiempo de entrega"), ['class' => 'col-3 control-label text-right']) !!}
+            <div class="col-6">
+                {!! Form::number('estimated_time', null,  ['class' => 'form-control', 'min=0','max=60' ,'step'=>'any','placeholder'=>  trans("30 =  30 minutos, 10 = 10 minutos")]) !!}
+                <div class="form-text text-muted">
+                    {{ trans("Ingresar el tiempo promedio que tardan las ordenes en llegar en MINUTOS.") }}
+                </div>
+
+            </div>
+        </div>
+
+       
+    {{-- <div class="form-group row ">
+        {!! Form::label('information', trans("lang.market_information"), ['class' => 'col-3 control-label text-right']) !!}
+        <div class="col-9"> --}}
+            {{-- <input type="date" name="date" id="date" class="form-control" style="width: 100%; display: inline;" onchange="invoicedue(event);" > --}}
+{{--        
+            <div class="form-text text-muted">{{ trans("lang.market_information_help") }}</div>
+        </div>
+    </div> --}}
 </div>
 
 @hasrole('admin')

@@ -88,7 +88,7 @@ return [
 
     'app_setting_default_tax_placeholder' => '20',
 
-    'app_setting_driver_api_url' => 'Driver API URL',
+    'app_setting_driver_api_url' => 'Conductor API URL',
 
     'app_setting_driver_api_url_help' => 'Agregar the driver applicatión api base url ( must end with / )',
 
@@ -194,17 +194,17 @@ return [
 
     'app_setting_firebase_storage_bucket_placeholder' => 'muti-restauts-15430c.appspot.com',
 
-    'app_setting_fixed_footer' => 'Fixed Footer',
+    'app_setting_fixed_footer' => 'Anclar pie de pagína',
 
-    'app_setting_fixed_footer_help' => 'Fix Footer on bottom',
+    'app_setting_fixed_footer_help' => 'Anclar pie de pagína',
 
-    'app_setting_fixed_header' => 'Fixed Header',
+    'app_setting_fixed_header' => 'Anclar encabezado',
 
-    'app_setting_fixed_header_help' => 'Fix Header on top',
+    'app_setting_fixed_header_help' => 'Anclar encabezado.',
 
-    'app_setting_fr' => 'French',
+    'app_setting_fr' => 'Frances',
 
-    'app_setting_global' => 'Opción Global',
+    'app_setting_global' => 'Opciones',
 
     'app_setting_globals' => 'Opciones Globales',
 
@@ -290,7 +290,7 @@ return [
 
     'app_setting_mail_username_placeholder' => 'YourUsername',
 
-    'app_setting_mailgun' => 'Mailgun Driver',
+    'app_setting_mailgun' => 'Mailgun Conductor',
 
     'app_setting_mailgun_domain' => 'Mailgun domain',
 
@@ -330,11 +330,11 @@ return [
 
     'app_setting_notification' => 'Notificación',
 
-    'app_setting_notifications' => 'Push Notifications',
+    'app_setting_notifications' => 'Notificaciones',
 
-    'app_setting_orange' => 'Orange',
+    'app_setting_orange' => 'Naranja',
 
-    'app_setting_payment' => 'Modos de pagos',
+    'app_setting_payment' => 'Metodos de pagos',
 
     'app_setting_paypal' => 'PayPal',
 
@@ -360,15 +360,15 @@ return [
 
     'app_setting_paypal_secret_placeholder' => 'PayPal Secret Here',
 
-    'app_setting_paypal_username' => 'PayPal Username',
+    'app_setting_paypal_username' => 'Usuario de PayPal',
 
     'app_setting_paypal_username_help' => 'Agregar PayPal Username',
 
     'app_setting_paypal_username_placeholder' => 'PayPal Username Here',
 
-    'app_setting_pt' => 'Portuguese',
+    'app_setting_pt' => 'Portugues',
 
-    'app_setting_red' => 'Red',
+    'app_setting_red' => 'Rojo',
 
     'app_setting_scaffold_color' => 'Background Color for bright theme',
 
@@ -396,11 +396,11 @@ return [
 
     'app_setting_sky_blue' => 'Sky Blue',
 
-    'app_setting_smtp' => 'SMTP Driver',
+    'app_setting_smtp' => 'SMTP Conductor',
 
     'app_setting_social' => 'Social Authentication',
 
-    'app_setting_sparkpost' => 'Sparkpost Driver',
+    'app_setting_sparkpost' => 'Sparkpost Conductor',
 
     'app_setting_sparkpost_options_endpoint' => 'Agregar Opciones endpoint',
 
@@ -460,7 +460,7 @@ return [
 
     'app_setting_white' => 'Blanco',
 
-    'back' => 'Back to List',
+    'back' => 'Volver a la lista',
 
     'boolean' => 'Boolean',
 
@@ -560,11 +560,11 @@ return [
 
     'custom_field_create' => 'Crear Custom Field',
 
-    'custom_field_created_at' => 'Created At',
+    'custom_field_created_at' => 'Creado',
 
-    'custom_field_created_at_help' => 'Agregar Created At',
+    'custom_field_created_at_help' => 'Agregar Creado',
 
-    'custom_field_created_at_placeholder' => 'Agregar Created At',
+    'custom_field_created_at_placeholder' => 'Agregar Creado',
 
     'custom_field_custom_field_id' => 'Custom Field',
 
@@ -598,11 +598,11 @@ return [
 
     'custom_field_id_placeholder' => 'Agregar',
 
-    'custom_field_in_table' => 'In Table',
+    'custom_field_in_table' => 'En la tabla',
 
-    'custom_field_in_table_help' => 'Agregar In Table',
+    'custom_field_in_table_help' => 'Agregar En la tabla',
 
-    'custom_field_in_table_placeholder' => 'Agregar In Table',
+    'custom_field_in_table_placeholder' => 'Agregar En la tabla',
 
     'custom_field_name' => 'nombre',
 
@@ -662,21 +662,21 @@ return [
 
     'delivery_address_create' => 'Crear Dirección de entrega',
 
-    'delivery_address_desc' => 'Adminstrar Direcciones de entrega',
+    'delivery_address_desc' => 'Adminstrar Ubicaciones',
 
-    'delivery_address_description' => 'Description',
+    'delivery_address_description' => 'Descripción',
 
-    'delivery_address_description_help' => 'Agregar Description',
+    'delivery_address_description_help' => 'Agregar Descripción',
 
-    'delivery_address_description_placeholder' => 'Agregar Description',
+    'delivery_address_description_placeholder' => 'Agregar Descripción',
 
     'delivery_address_edit' => 'Edit Dirección de entrega',
 
-    'delivery_address_is_default' => 'Is Default',
+    'delivery_address_is_default' => 'Predeterminado',
 
-    'delivery_address_is_default_help' => 'Agregar Is Default',
+    'delivery_address_is_default_help' => 'Agregar Predeterminado',
 
-    'delivery_address_is_default_placeholder' => 'Agregar Is Default',
+    'delivery_address_is_default_placeholder' => 'Agregar Predeterminado',
 
     'delivery_address_latitude' => 'Latitude',
 
@@ -690,21 +690,21 @@ return [
 
     'delivery_address_longitude_placeholder' => 'Agregar Longitude',
 
-    'delivery_address_plural' => 'Direcciones de entrega',
+    'delivery_address_plural' => 'Ubicaciones',
 
-    'delivery_address_table' => 'Direcciones de entrega List',
+    'delivery_address_table' => 'Lista de Ubicaciones',
 
     'delivery_address_updated_at' => 'Actualizado',
 
-    'delivery_address_user_id' => 'Usuario ID',
+    'delivery_address_user_id' => 'Id Usuario',
 
-    'delivery_address_user_id_help' => 'Agregar Usuario ID',
+    'delivery_address_user_id_help' => 'Agregar Id Usuario',
 
-    'delivery_address_user_id_placeholder' => 'Agregar Usuario ID',
+    'delivery_address_user_id_placeholder' => 'Agregar Id Usuario',
 
-    'done' => 'Done',
+    'done' => 'Hecho',
 
-    'driver' => 'Driver',
+    'driver' => 'Conductor',
 
     'driver_available' => 'Available',
 
@@ -712,23 +712,23 @@ return [
 
     'driver_available_placeholder' => 'Agregar Available',
 
-    'driver_create' => 'Refresh drivers',
+    'driver_create' => 'Recargar conductor',
 
-    'driver_delivery_fee' => 'Delivery Fee (%)',
+    'driver_delivery_fee' => 'Comisión de envio (%)',
 
-    'driver_delivery_fee_help' => 'Ex: 50 for 50% of delivery amount of market',
+    'driver_delivery_fee_help' => 'Ex: 50 para 50% ',
 
-    'driver_delivery_fee_placeholder' => 'Agregar Delivery Fee',
+    'driver_delivery_fee_placeholder' => 'Agregar Comisión de envio',
 
     'driver_desc' => 'Administrar repartidores',
 
-    'driver_earning' => 'Earning',
+    'driver_earning' => 'Ganancia',
 
-    'driver_earning_help' => 'Agregar Earning',
+    'driver_earning_help' => 'Agregar Ganancia',
 
-    'driver_earning_placeholder' => 'Agregar Earning',
+    'driver_earning_placeholder' => 'Agregar Ganancia',
 
-    'driver_edit' => 'Edit Driver',
+    'driver_edit' => 'Edit Conductor',
 
     'driver_plural' => 'Repartidores',
 
@@ -742,11 +742,11 @@ return [
 
     'driver_updated_at' => 'Actualizado',
 
-    'driver_user_id' => 'Usuario ID',
+    'driver_user_id' => 'Id Usuario',
 
-    'driver_user_id_help' => 'Agregar Usuario ID',
+    'driver_user_id_help' => 'Agregar Id Usuario',
 
-    'driver_user_id_placeholder' => 'Agregar Usuario ID',
+    'driver_user_id_placeholder' => 'Agregar Id Usuario',
 
     'drivers_payout' => 'Pago de repartidores',
 
@@ -786,37 +786,37 @@ return [
 
     'drivers_payout_updated_at' => 'Actualizado',
 
-    'drivers_payout_user_id' => 'Usuario ID',
+    'drivers_payout_user_id' => 'Id Usuario',
 
-    'drivers_payout_user_id_help' => 'Agregar Usuario ID',
+    'drivers_payout_user_id_help' => 'Agregar Id Usuario',
 
-    'drivers_payout_user_id_placeholder' => 'Agregar Usuario ID',
+    'drivers_payout_user_id_placeholder' => 'Agregar Id Usuario',
 
-    'earning' => 'Earning',
+    'earning' => 'Ganancia',
 
-    'earning_admin_earning' => 'Admin Earning',
+    'earning_admin_earning' => 'Admin Ganancia',
 
-    'earning_admin_earning_help' => 'Agregar Admin Earning',
+    'earning_admin_earning_help' => 'Agregar Admin Ganancia',
 
-    'earning_admin_earning_placeholder' => 'Agregar Admin Earning',
+    'earning_admin_earning_placeholder' => 'Agregar Admin Ganancia',
 
     'earning_create' => 'Refresh Establecimientos',
 
-    'earning_delivery_fee' => 'Delivery Fee',
+    'earning_delivery_fee' => 'Comisión de envio',
 
-    'earning_delivery_fee_help' => 'Agregar Delivery Fee',
+    'earning_delivery_fee_help' => 'Agregar Comisión de envio',
 
-    'earning_delivery_fee_placeholder' => 'Agregar Delivery Fee',
+    'earning_delivery_fee_placeholder' => 'Agregar Comisión de envio',
 
     'earning_desc' => 'Earnings Management',
 
-    'earning_edit' => 'Edit Earning',
+    'earning_edit' => 'Edit Ganancia',
 
-    'earning_market_earning' => 'Establecimiento Earning',
+    'earning_market_earning' => 'Establecimiento Ganancia',
 
-    'earning_market_earning_help' => 'Agregar Establecimiento Earning',
+    'earning_market_earning_help' => 'Agregar Establecimiento Ganancia',
 
-    'earning_market_earning_placeholder' => 'Agregar Establecimiento Earning',
+    'earning_market_earning_placeholder' => 'Agregar Establecimiento Ganancia',
 
     'earning_market_id' => 'Id del Establecimiento',
 
@@ -944,11 +944,11 @@ return [
 
     'gallery_desc' => 'Galleries Management',
 
-    'gallery_description' => 'Description',
+    'gallery_description' => 'Descripción',
 
-    'gallery_description_help' => 'Agregar Description',
+    'gallery_description_help' => 'Agregar Descripción',
 
-    'gallery_description_placeholder' => 'Agregar Description',
+    'gallery_description_placeholder' => 'Agregar Descripción',
 
     'gallery_edit' => 'Edit Gallery',
 
@@ -970,7 +970,7 @@ return [
 
     'gallery_updated_at' => 'Actualizado',
 
-    'main_fields' => 'Main Fields',
+    'main_fields' => 'Campos principales',
 
     'market' => 'Establecimiento',
 
@@ -1094,7 +1094,7 @@ return [
 
     'market_updated_at' => 'Actualizado',
 
-    'market_users' => 'Generentes',
+    'market_users' => 'Gerentes',
 
     'market_users_help' => 'Seleccione los gerentes que tendra el establecimiento',
 
@@ -1262,7 +1262,7 @@ return [
 
     'notification_create' => 'Crear Notificación',
 
-    'notification_created_at' => 'Notificado el:',
+    'notification_created_at' => 'Notificado hace:',
 
     'notification_desc' => 'Notifications Management',
 
@@ -1282,13 +1282,13 @@ return [
 
     'notification_plural' => 'Notifications',
 
-    'notification_read' => 'Read',
+    'notification_read' => 'Leida',
 
-    'notification_read_at' => 'Read At',
+    'notification_read_at' => 'Leida hace',
 
-    'notification_read_help' => 'Agregar Read',
+    'notification_read_help' => 'Leer',
 
-    'notification_read_placeholder' => 'Agregar Read',
+    'notification_read_placeholder' => 'Leer',
 
     'notification_status_changed_description' => 'Su orden #:order_id está :order_status toca para dar seguimiento',
 
@@ -1296,21 +1296,21 @@ return [
 
     'notification_table' => 'Notifications List',
 
-    'notification_title' => 'Titulo',
+    'notification_title' => 'Titúlo',
 
-    'notification_title_help' => 'Agregar Title',
+    'notification_title_help' => 'Agregar Titúlo',
 
-    'notification_title_placeholder' => 'Agregar Title',
+    'notification_title_placeholder' => 'Agregar Titúlo',
 
     'notification_updated_at' => 'Actualizado',
 
     'notification_user_id' => 'ID de usuario',
 
-    'notification_user_id_help' => 'Agregar Usuario ID',
+    'notification_user_id_help' => 'Agregar Id Usuario',
 
-    'notification_user_id_placeholder' => 'Agregar Usuario ID',
+    'notification_user_id_placeholder' => 'Agregar Id Usuario',
 
-    'notification_your_order' => 'Su orden #:order_id está :order_status',
+    'notification_your_order' => 'Tu #:order_id :order_status',
 
     'number' => 'Number',
 
@@ -1340,9 +1340,9 @@ return [
 
     'order_driver_id' => 'Delivery Boy',
 
-    'order_driver_id_help' => 'Select Delivery Boy',
+    'order_driver_id_help' => 'Seleccionar repartidor',
 
-    'order_driver_id_placeholder' => 'Select Delivery Boy',
+    'order_driver_id_placeholder' => 'Seleccionar repartidor',
 
     'order_edit' => 'Editar Orden',
 
@@ -1530,11 +1530,11 @@ return [
 
     'product_ingredients_placeholder' => 'Inserte Ingredientes',
 
-    'product_market_id' => 'establecimeinto',
+    'product_market_id' => 'establecimiento',
 
-    'product_market_id_help' => 'Inserte establecimeinto',
+    'product_market_id_help' => 'Inserte establecimiento',
 
-    'product_market_id_placeholder' => 'Inserte establecimeinto',
+    'product_market_id_placeholder' => 'Inserte establecimiento',
 
     'product_name' => 'Nombre',
 
@@ -1678,7 +1678,7 @@ return [
 
     'setting' => 'Configuraciones',
 
-    'setting_desc' => 'Settings Management',
+    'setting_desc' => 'Gestionando configuración',
 
     'sync_translation' => 'Sync Translations',
 
@@ -1724,15 +1724,15 @@ return [
 
     'user_create' => 'Crear Usuario',
 
-    'user_created_at' => 'Created At',
+    'user_created_at' => 'Creado',
 
-    'user_created_at_help' => 'Agregar Created At',
+    'user_created_at_help' => 'Agregar Creado',
 
-    'user_created_at_placeholder' => 'Agregar Created At',
+    'user_created_at_placeholder' => 'Agregar Creado',
 
-    'user_delete' => 'Delete',
+    'user_delete' => 'Borrar',
 
-    'user_desc' => 'Users Management',
+    'user_desc' => 'Administrar Usuarios',
 
     'user_edit' => 'Edit Usuario',
 
@@ -1748,7 +1748,7 @@ return [
 
     'user_id_placeholder' => 'Agregar',
 
-    'user_login_as_user' => 'Login as this user',
+    'user_login_as_user' => 'Iniciar sesión con este usuario',
 
     'user_name' => 'nombre',
 
@@ -1768,9 +1768,9 @@ return [
 
     'user_phone_placeholder' => '+1 553 459 632',
 
-    'user_plural' => 'Users',
+    'user_plural' => 'Usuarios',
 
-    'user_profile' => 'Profile',
+    'user_profile' => 'Perfil',
 
     'user_remember_token' => 'Remember Token',
 
@@ -1820,11 +1820,11 @@ return [
 
     'option_image_placeholder' => 'Agregar Imagen',
 
-    'option_description' => 'Description',
+    'option_description' => 'Descripción',
 
-    'option_description_help' => 'Agregar Description',
+    'option_description_help' => 'Agregar Descripción',
 
-    'option_description_placeholder' => 'Agregar Description',
+    'option_description_placeholder' => 'Agregar Descripción',
 
     'option_price' => 'Precio',
 
@@ -1848,9 +1848,9 @@ return [
 
     'field' => 'Categoria',
 
-    'field_plural' => 'Ctg Establecimientos',
+    'field_plural' => 'Categorias',
 
-    'field_desc' => 'Administrar Ctg.',
+    'field_desc' => 'Administrar Categ.',
 
     'field_edit' => 'Editar Categoria',
 
@@ -1864,11 +1864,11 @@ return [
 
     'field_name_placeholder' => 'Agregar nombre',
 
-    'field_description' => 'Description',
+    'field_description' => 'Descripción',
 
-    'field_description_help' => 'Agregar Description',
+    'field_description_help' => 'Agregar Descripción',
 
-    'field_description_placeholder' => 'Agregar Description',
+    'field_description_placeholder' => 'Agregar Descripción',
 
     'field_image' => 'Image',
 
@@ -1948,7 +1948,7 @@ return [
 
     'admin_area' => 'Admin Configurations',
 
-    'market_fields' => 'Ctg. Establecimiento',
+    'market_fields' => 'Categ. Establecimiento',
 
     'market_fields_help' => 'Seleccione categoria del Establecimiento',
 
@@ -2001,6 +2001,24 @@ return [
     'market_closed' => 'cerrado',
 
     //Nuevos terminos agregados
+    'total_quantity' => 'Usos permitidos',
+    'total_quantity_help' => 'La cantida maxima de usos permitidos',
+    'total_quantity_placeholder' => '50',
+
+    'max_for_user' => 'Usos por usuarios',
+    'max_for_user_help' => 'La cantida maxima de usos permitidos por usuario',
+    'max_for_user_placeholder' => '2',
+
+    'Waiting for Client' => 'Pago pendiente',
+    'Not Paid' => 'No pagada',
+    'Paid' => 'Pagada',
+    'Notifications_StatusChangedOrder' => 'Una orden Cambio de estado',
+    'Notifications_AcepptedAndAssignedOrder' => 'Una orden esta buscando repartidor',
+    'Notifications_OrderRejected' => 'Una orden fue rechazada',
+    'Notifications_OrderNoAccept' => 'Una orden fue rechazada por un repartidor',
+    'Notifications_NewOrder' => 'Se hizo una nueva orden',
+    'Notifications_OrderAccepted' => 'Se acepto una orden',
+
 
     'department_updated_at' => 'Actualización',
     'department_plural' => 'Departamentos',
@@ -2021,6 +2039,8 @@ return [
     'department_description' => 'Descripción',
     'department_description_placeholder' => 'Todo tipo de comestibles',
     'department_description_help' => 'Descripción que indique de que se trata el Departamento',
+
+// Subdepartamentos
     'subdepartment' => 'Subdepartamento',
     'subdepartment_plural' => 'Subdepartamentos',
     'subdepartment_desc' => 'Administrar subdepartamentos',
@@ -2029,10 +2049,9 @@ return [
     'subdepartment_updated_at' => 'Actualizado',
     'subdepartment_create' => 'Crear Subdepartamento',
     'department_id' => 'Departamentos',
+    'department_id_help' => 'Departamentos asociados',
     'subdepartment_image_help' => 'Imagen que se mostrara en el app',
     'subdepartment_edit' => 'Editar',
-
-    'department_id_help' => 'Departamentos asociados',
     'subdepartments' => 'Subdepartamentos',
     'subdepartment_color_helper' => 'Color con el que se mostrar esté Subdepartamento',
     'subdepartment_color' => 'Color',
@@ -2042,7 +2061,7 @@ return [
     'subdepartment_description' => 'Descripción',
     'subdepartment_description_placeholder' => 'Productos hechos con leche',
     'subdepartment_description_help' => 'Descripción que indique de que se trata el Subdepartamento',
-
+// Supermercados
     'supermarket' => 'Supermercados',
     'supermarket_address' => 'Dirección',
     'supermarket_address_help' => 'Agregar Dirección',
@@ -2104,8 +2123,97 @@ return [
     'supermarket_review_user_id_placeholder' => 'Agregar Usuario',
     'supermarket_table' => 'Lista de Supermercados',
     'supermarket_updated_at' => 'Actualizado',
-    'supermarket_users' => 'Generentes',
+    'supermarket_users' => 'Gerentes',
     'supermarket_users_help' => 'Seleccione los gerentes que tendra el establecimiento',
+
+// Tienda de conveniencia
+    'convenience_store' => 'Tiendas de conveniencia',
+    'convenience_store_address' => 'Dirección',
+    'convenience_store_address_help' => 'Agregar Dirección',
+    'convenience_store_address_placeholder' => 'Agregar Dirección',
+    'convenience_store_admin_commission' => 'Comisión administrativa',
+    'convenience_store_admin_commission_help' => 'Comisión administrativa(Ejm 30 par 30% de la ganancia para los gerentes)',
+    'convenience_store_admin_commission_placeholder' => '30',
+    'convenience_store_create' => 'Crear Tienda de conveniencia',
+    'convenience_store_delivery_fee' => 'Costo de envio',
+    'convenience_store_delivery_fee_help' => 'Editar costo por entrega a domicilio (Ejm 50 para L 50 por orden)',
+    'convenience_store_delivery_fee_placeholder' => 'Editar el monto del Costo de envio',
+    'convenience_store_desc' => 'Administrar Tiendas de conveniencia',
+    'convenience_store_description' => 'Descripción',
+    'convenience_store_description_help' => 'Agregar Descripción',
+    'convenience_store_description_placeholder' => 'Agregar Descripción',
+    'convenience_store_drivers' => 'Repartidor',
+    'convenience_store_drivers_help' => 'Seleccione los repartidores del establecimiento',
+    'convenience_store_edit' => 'Editar Tienda de conveniencia',
+    'convenience_store_image' => 'Imagen',
+    'convenience_store_image_help' => 'Agregar imagen',
+    'convenience_store_image_placeholder' => 'Agregar imagen',
+    'convenience_store_information' => 'Información',
+    'convenience_store_information_help' => 'Agregar información',
+    'convenience_store_information_placeholder' => 'Agregar información',
+    'convenience_store_latitude' => 'Latitud',
+    'convenience_store_latitude_help' => 'Agregar Latitud',
+    'convenience_store_latitude_placeholder' => 'Agregar Latitud',
+    'convenience_store_longitude' => 'Longitud',
+    'convenience_store_longitude_help' => 'Agregar Longitud',
+    'convenience_store_longitude_placeholder' => 'Agregar Longitud',
+    'convenience_store_mobile' => 'móvil',
+    'convenience_store_mobile_help' => 'Agregar telefono móvil',
+    'convenience_store_mobile_placeholder' => 'Agregar telefono móvil',
+    'convenience_store_name' => 'nombre',
+    'convenience_store_name_help' => 'Agregar nombre',
+    'convenience_store_name_placeholder' => 'Agregar nombre',
+    'convenience_store_phone' => 'Telefono',
+    'convenience_store_phone_help' => 'Agregar Telefono',
+    'convenience_store_phone_placeholder' => 'Agregar Telefono',
+    'convenience_store_plural' => 'Tiendas de conveniencia',
+    'convenience_store_review' => 'Opiniones',
+    'convenience_store_review_create' => 'Crear opinión',
+    'convenience_store_review_desc' => 'Administrar opiniones',
+    'convenience_store_review_edit' => 'Editar opinión',
+    'convenience_store_review_market_id' => 'Tienda de conveniencia',
+    'convenience_store_review_market_id_help' => 'Agregar Tienda de conveniencia',
+    'convenience_store_review_market_id_placeholder' => 'Agregar Tienda de conveniencia',
+    'convenience_store_review_plural' => 'Opiniones',
+    'convenience_store_review_rate' => 'Puntuación',
+    'convenience_store_review_rate_help' => 'Agregar Puntuación',
+    'convenience_store_review_rate_placeholder' => 'Agregar Puntuación',
+    'convenience_store_review_review' => 'Opinión',
+    'convenience_store_review_review_help' => 'Agregar Opinión',
+    'convenience_store_review_review_placeholder' => 'Agregar Opinión',
+    'convenience_store_review_table' => 'Lista de comentarios ',
+    'convenience_store_review_updated_at' => 'Actualizado',
+    'convenience_store_review_user_id' => 'Usuario',
+    'convenience_store_review_user_id_help' => 'Agregar Usuario',
+    'convenience_store_review_user_id_placeholder' => 'Agregar Usuario',
+    'convenience_store_table' => 'Lista de Tiendas de conveniencia',
+    'convenience_store_updated_at' => 'Actualizado',
+    'convenience_store_users' => 'Gerentes',
+    'convenience_store_users_help' => 'Seleccione los gerentes que tendra el establecimiento',
+
+    // Secciones
+    'section' => 'Sección',
+    'section_plural' => 'Secciones',
+    'section_desc' => 'Administrar Secciones',
+    'section_table' => 'Lista de Secciones',
+    'section_image' => 'Imagen',
+    'section_updated_at' => 'Actualizado',
+    'section_create' => 'Crear Sección',
+    'section_id' => 'Sección',
+    'section_id_help' => 'Secciones asociados',
+    'section_market_id' => 'Establecimientos',
+    'section_market_id_help' => 'Establecimientos asociados',
+    'Sections' => 'Secciones',
+    'section_image_help' => 'Imagen que se mostrara en el app',
+    'section_edit' => 'Editar sección',
+    'section_color_helper' => 'Color con el que se mostrar está Sección',
+    'section_color' => 'Color',
+    'section_name' => 'Nombre',
+    'section_name_placeholder' => 'Pan',
+    'section_name_help' => 'Nombre con el que se mostrara en el app',
+    'section_description' => 'Descripción',
+    'section_description_placeholder' => 'Pan',
+    'section_description_help' => 'Descripción que indique de que se trata la Sección',
 
     'type_market_name_placeholder' => 'Ejemplo: Supermercado',
     'type_market_name_help' => 'El nombre que tendra el Tipo de Establecimiento',
@@ -2114,7 +2222,6 @@ return [
     'type_market_enable' => 'Habilitar el tipo de Establecimiento',
     'type_market_checbox_enable_help' => 'Habilita/Deshabilitar el tipo de Establecimiento. ',
     'type_market' => 'Tipo de Establecimiento',
-
     'type_market_description' => 'Descripción',
     'type_market_name' => 'Nombre',
     'type_market_enable' => 'Habilitado',
@@ -2144,7 +2251,7 @@ return [
     'coupon_code_help' => 'Insertar código de cupón',
     'coupon_code_placeholder' => 'PROMOCIÓN',
     'coupon_discount' => 'Descuento',
-    'coupon_discount_help' => 'Insertar descuento Importe <b> fijo </b> (Ej: 8 por 8 $) o <b> Porcentaje </b> (Ej: 10 por 10%)',
+    'coupon_discount_help' => 'Insertar descuento Importe <b> fijo </b> (Ej: 8 para 8 L), <b> Porcentaje </b> (Ej: 10 para 10%) o <b> Envio </b> (Ej: 10 para 10%)',
     'coupon_discount_placeholder' => '8',
     'coupon_discount_type' => 'Tipo de descuento',
     'coupon_percent' => 'Porcentaje',
@@ -2154,7 +2261,7 @@ return [
     'coupon_description' => 'Descripción',
     'coupon_description_help' => 'Insertar descripción',
     'coupon_description_placeholder' => 'Insertar descripción',
-    'coupon_expires_at' => 'Caduca a las',
+    'coupon_expires_at' => 'Caducidad',
     'coupon_expires_at_help' => 'Insertar expira en',
     'coupon_expires_at_placeholder' => 'Insertar expira en',
     'coupon_enabled' => 'Habilitado',
@@ -2171,6 +2278,12 @@ return [
     'app_setting_initial_greeting_help' => 'Saludo inicial que se mostrara en la pantalla de inicial. NOTA: 10 Caracteres maximo',
     'initial_greeting' => 'Saludo inicial en pantalla inicial',
     'app_setting_initial_greeting_placeholder' => 'Buen Dia',
+    'updated_successfully' => ':operator Actualizado exitosamente',
+    
+    'app_setting_markets_closed' => 'Ningún local abierto',
+    'app_setting_markets_closed_help' => 'Mensaje que aparecera cuando todos los establecimientos esten cerrados',
+    'app_setting_markets_closed_placeholder' => 'Por el día de hoy hemos cerrado, pero mañana con mucho gusto tomaremos tus órdenes.',
+
     'app_setting_message_home' => 'Saludo largo inicial',
     'app_setting_message_home_help' => 'Saludo largo inicial que se mostrara en la pantalla de inicial mas detallado. NOTA:50 Caracteres maximo',
     'message_home' => 'Saludo inicial en pantalla inicial',
@@ -2186,7 +2299,7 @@ return [
     'distance_per_extra' => 'Distancia mínima antes del Extra',
     'distance_per_extra_help' => 'Edite la distancia mínima antes del cobro extra (Ej 6 = 6 km / mi)',
     'distance_per_extra_placeholder' => 'Edite la distancia mínima antes del cargo extra al pedido',
-    'app_setting_fac_password_help' => 'Inserte la contraseña del comerciante del perfil F.A.C',
+    'app_setting_fac_password_help' => 'Inserte la Contraseña de procesamiento del comerciante del perfil F.A.C, correspondiente. Es una contraseña diferente a la usada para iniciar sesión en el perfil',
     'app_setting_fac_password' => 'Contraseña',
     'app_setting_enable_fac' => 'Habilitar F.A.C',
     'app_setting_enable_fac_help' => 'Activar FAC como modo de pago',
@@ -2205,15 +2318,17 @@ return [
     'app_setting_fac_base_url_3d_secure_help' => 'Inserte la URL 3D Secure Base para F.A.C. cambiar "marlin" por "ecm" para realizar pruebas',
     'app_setting_fac_base_url_3d_secure_placeholder' => 'ejem: https://ecm.firstatlanticcommerce.com/PGServiceXML/Authorize3DS',
     'scheduled_order_hours' => 'Horas de órdenes agendada',
-    'payment_encargo_done' => 'Encargo pagada satisfactoriamente',
-    'payment_encargo_waiting' => 'Encargo no pagado todavia',
+    'payment_encargo_done' => 'Mandadito pagada satisfactoriamente',
+    'payment_encargo_waiting' => 'Mandadito no pagado todavia',
     'encargo' => 'encargo',
     'payment_status_help' => 'Seleccione el estado del pedido',
     'payment_status_placeholder' => 'Seleccione el estado del pedido',
-    'encargo_edit' => 'Editar Encargo',
-    'encargo_status_id' => "Estado del Encargo",
+    'encargo_edit' => 'Editar Mandadito',
+    'encargo_driver_id_placeholder' => 'Seleccionar repartidor',
+
+    'encargo_status_id' => "Estado del Mandadito",
     'encargo_driver_id' => "Repartidor",
-    'encargo_status_id_help' => "Estado actual del Encargo",
+    'encargo_status_id_help' => "Estado actual del Mandadito",
     'encargo_driver_id_help' => "Seleccione Repartidor",
     'encargo_active' => "Activo",
     'encargo_pending' => "Pendiente",
@@ -2221,20 +2336,20 @@ return [
     'encargo_paid' => "Pagada",
     'save' => 'Guardar',
     'saved_successfully' => ':operator Guardado Exitoso',
-    'encargo_plural' => 'Encargos',
-    'encargo_id' => 'ID Encargo',
+    'encargo_plural' => 'Mandaditos',
+    'encargo_id' => 'ID Mandadito',
     'encargo_user_id' => 'Cliente',
     'encargo_tax' => 'Impuesto',
-    'encargo_delivery_fee' => 'Cobro por Encargo',
-    'encargo_table' => 'Tabla de Encargo',
+    'encargo_delivery_fee' => 'Cobro por Mandadito',
+    'encargo_table' => 'Tabla de Mandadito',
     'encargo_edit_properties' => 'Editar Propiedades',
-    'encargo_desc' => 'Administrar Encargos',
-    'encargos_list' => 'Lista de Encargos',
+    'encargo_desc' => 'Administrar Mandaditos',
+    'encargos_list' => 'Lista de Mandaditos',
     'client_encargo' => 'Client',
-    'status_encargo' => 'Estado de Encargo',
+    'status_encargo' => 'Estado de Mandadito',
     'app_setting_enable_pay_on_line' => 'Habilitar pago desde internet',
     'app_setting_enable_pay_on_line_help' => 'Activar pagos en línea',
-    'encargo' => 'Encargo',
+    'encargo' => 'Mandadito',
     'encargo_properties' => 'Propiedades',
     'app_setting_enable_online_payments' => 'Habilitar pagos en línea',
     'app_setting_general_payment_control' => 'Control general de pago',
@@ -2276,13 +2391,16 @@ return [
     'app_setting_pixelpay_dominio_help' => 'Ingrese el dominio URL de PixelPay',
     'app_setting_pixelpay_dominio_placeholder' => 'https://(DOMINIO)/sandbox/hosted/payment',
     'option_group_updated_at' => 'Ultim. Actualización',
-    'group_number_of_items_title' => 'Cantidad de opciones seleccionables, 1 = Todos',
+    'group_number_of_items_title' => 'Cantidad de opciones seleccionables',
     'group_number_of_items_enable' => 'Cantidad de opciones seleccionables',
     'group_number_of_items_placeholder' => '3',
-    'quantity_selectable_elements_help' => 'Ingrese la cantidad de elementos seleccionables. Minimo 1',
+    'quantity_selectable_elements_help' => 'Ingrese la cantidad de elementos seleccionables. Minimo 2',
     'option_group_multi' => 'Multi seleccionable',
     'option_group_checbox_help' => '  Habiltar/Deshabilitar Selección multiple',
     'mobile_home' => 'Pantalla principal',
+    'mobile_message' => 'Mensajes generales',
+    'app_setting_mobile_mobile_message' => 'Edicición de mensajes generales',
+
     'force_select' => 'Forzar selección',
     'force_select_help' => 'Forzar al usuario a seleccionar al menos una opción del grupo',
 

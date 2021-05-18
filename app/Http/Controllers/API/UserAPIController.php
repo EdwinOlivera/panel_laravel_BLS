@@ -48,10 +48,12 @@ class UserAPIController extends Controller
                 'email' => 'required|email',
                 'password' => 'required',
             ]);
+
             if (auth()->attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
                 // Authentication passed...
                 $user = auth()->user();
                 $user->device_token = $request->input('device_token', '');
+
                 $user->save();
                 return $this->sendResponse($user, 'User retrieved successfully');
             }
@@ -61,6 +63,36 @@ class UserAPIController extends Controller
 
     }
 
+    public function loginDriver(Request $request)
+    {
+        try {
+
+            $this->validate($request, [
+                'phone' => 'required',
+                'password' => 'required',
+            ]);
+            $verificar = User::where('phone', '=', $request->input('phone'))->exists();
+            if ($verificar) {
+                $userFind = User::where('phone', '=', $request->input('phone'))->get();
+
+                if (auth()->attempt(['email' => $userFind[0]['email'], 'password' => $request->input('password')])) {
+                    $user = auth()->user();
+                    $user->device_token = $request->input('device_token', '');
+
+                    $user->save();
+                    return $this->sendResponse($user, 'User retrieved successfully');
+                } else {
+                    return $this->sendResponse([], 'Usuario no encontrado');
+                }
+            } else {
+                return $this->sendResponse([], 'Usuario no encontrado');
+            }
+
+        } catch (\Exception $e) {
+            return $this->sendError($e->getMessage(), 401);
+        }
+
+    }
 
     /**
      * Create a new user instance after a valid registration.
@@ -79,6 +111,7 @@ class UserAPIController extends Controller
             $user = new User;
             $user->name = $request->input('name');
             $user->url_image_firebase = $request->input('url_image_firebase');
+            $user->rtn_user = $request->input('rtn_user');
 
             $user->email = $request->input('email');
             $user->device_token = $request->input('device_token', '');
@@ -180,6 +213,13 @@ class UserAPIController extends Controller
                 'enable_fac' => '',
                 'enable_fac_3d_secure' => '',
                 'enable_zone_maps' => '',
+                'enable_mandaditos' => '',
+                'initial_greeting' => '',
+                'message_home' => '',
+                'message_markets_closed' => '',
+                'message_home_markets' => '',
+                'app_off_line' => '',
+                'message_app_off_line' => '',
 
             ]
         );
@@ -253,46 +293,49 @@ class UserAPIController extends Controller
         }
 
     }
+
     public function loginWithFacebook(Request $request)
     {
 
         try {
-            
+
             $this->validate($request, [
                 'name' => 'required',
                 'email' => 'required|email',
                 'password' => 'required',
             ]);
-            $userFind = User::where('email', $request['email'])->first();
-            if ($userFind) {
-                $userFind->name = $request['name'];
-                $user = $userFind;
+            $Verificar = User::where('email', $request['email'])->exists();
+            if ($Verificar) {
+                $userFind = User::where('email', $request['email'])->first();
+                $user = $this->userRepository->findWithoutFail($userFind->id);
+
+                $user->name = $request['name'];
                 $user->device_token = $request->input('device_token', '');
                 $user->save();
                 return $this->sendResponse($user, 'User retrieved successfully');
-            }else{
+            } else {
                 $user = new User;
                 $user->name = $request->input('name');
                 $user->url_image_firebase = $request->input('url_image_firebase');
                 $user->rtn_user = $request->input('rtn_user');
-    
+
                 $user->email = $request->input('email');
                 $user->device_token = $request->input('device_token', '');
                 $user->password = Hash::make($request->input('password'));
                 $user->api_token = str_random(60);
                 $user->save();
-    
+
                 $defaultRoles = $this->roleRepository->findByField('default', '1');
                 $defaultRoles = $defaultRoles->pluck('name')->toArray();
                 $user->assignRole($defaultRoles);
-    
+
                 if (copy(public_path('images/avatar_default.png'), public_path('images/avatar_default_temp.png'))) {
                     $user->addMedia(public_path('images/avatar_default_temp.png'))
                         ->withCustomProperties(['uuid' => bcrypt(str_random())])
                         ->toMediaCollection('avatar');
                 }
             }
-            
+
         } catch (\Exception $e) {
             return $this->sendError($e->getMessage(), 401);
         }
@@ -314,36 +357,38 @@ class UserAPIController extends Controller
                 'email' => 'required|email',
                 'password' => 'required',
             ]);
-            $userFind = User::where('email', $request['email'])->first();
-            if ($userFind) {
-                $userFind->name = $request['name'];
-                $user = $userFind;
+            $Verificar = User::where('email', $request['email'])->exists();
+            if ($Verificar) {
+                $userFind = User::where('email', $request['email'])->first();
+                $user = $this->userRepository->findWithoutFail($userFind->id);
+
+                $user->name = $request['name'];
                 $user->device_token = $request->input('device_token', '');
                 $user->save();
                 return $this->sendResponse($user, 'User retrieved successfully');
-            }else{
+            } else {
                 $user = new User;
                 $user->name = $request->input('name');
                 $user->url_image_firebase = $request->input('url_image_firebase');
                 $user->rtn_user = $request->input('rtn_user');
-    
+
                 $user->email = $request->input('email');
                 $user->device_token = $request->input('device_token', '');
                 $user->password = Hash::make($request->input('password'));
                 $user->api_token = str_random(60);
                 $user->save();
-    
+
                 $defaultRoles = $this->roleRepository->findByField('default', '1');
                 $defaultRoles = $defaultRoles->pluck('name')->toArray();
                 $user->assignRole($defaultRoles);
-    
+
                 if (copy(public_path('images/avatar_default.png'), public_path('images/avatar_default_temp.png'))) {
                     $user->addMedia(public_path('images/avatar_default_temp.png'))
                         ->withCustomProperties(['uuid' => bcrypt(str_random())])
                         ->toMediaCollection('avatar');
                 }
             }
-            
+
         } catch (\Exception $e) {
             return $this->sendError($e->getMessage(), 401);
         }
@@ -351,54 +396,54 @@ class UserAPIController extends Controller
         return $this->sendResponse($user, 'User retrieved successfully');
     }
 
-    
     public function loginWithGoogle(Request $request)
     {
 
         try {
-            
+
             $this->validate($request, [
                 'name' => 'required',
                 'email' => 'required|email',
                 'password' => 'required',
             ]);
-            $userFind = User::where('email', $request['email'])->first();
-            if ($userFind) {
-                $userFind->name = $request['name'];
-                $user = $userFind;
+            $Verificar = User::where('email', $request['email'])->exists();
+            if ($Verificar) {
+                $userFind = User::where('email', $request['email'])->first();
+                $user = $this->userRepository->findWithoutFail($userFind->id);
+
+                $user->name = $request['name'];
+                // $user = $userFind;
                 $user->device_token = $request->input('device_token', '');
                 $user->save();
                 return $this->sendResponse($user, 'User retrieved successfully');
-            }else{
+            } else {
                 $user = new User;
                 $user->name = $request->input('name');
                 $user->url_image_firebase = $request->input('url_image_firebase');
                 $user->rtn_user = $request->input('rtn_user');
-    
+
                 $user->email = $request->input('email');
                 $user->device_token = $request->input('device_token', '');
                 $user->password = Hash::make($request->input('password'));
                 $user->api_token = str_random(60);
                 $user->save();
-    
+
                 $defaultRoles = $this->roleRepository->findByField('default', '1');
                 $defaultRoles = $defaultRoles->pluck('name')->toArray();
                 $user->assignRole($defaultRoles);
-    
+
                 if (copy(public_path('images/avatar_default.png'), public_path('images/avatar_default_temp.png'))) {
                     $user->addMedia(public_path('images/avatar_default_temp.png'))
                         ->withCustomProperties(['uuid' => bcrypt(str_random())])
                         ->toMediaCollection('avatar');
                 }
             }
-            
+
         } catch (\Exception $e) {
             return $this->sendError($e->getMessage(), 401);
         }
 
     }
-
-
 
     /**
      * Create a new user instance after a valid registration.
@@ -415,36 +460,38 @@ class UserAPIController extends Controller
                 'email' => 'required|email',
                 'password' => 'required',
             ]);
-            $userFind = User::where('email', $request['email'])->first();
-            if ($userFind) {
-                $userFind->name = $request['name'];
-                $user = $userFind;
+            $Verificar = User::where('email', $request['email'])->exists();
+            if ($Verificar) {
+                $userFind = User::where('email', $request['email'])->first();
+                $user = $this->userRepository->findWithoutFail($userFind->id);
+
+                $user->name = $request['name'];
                 $user->device_token = $request->input('device_token', '');
                 $user->save();
                 return $this->sendResponse($user, 'User retrieved successfully');
-            }else{
+            } else {
                 $user = new User;
                 $user->name = $request->input('name');
                 $user->url_image_firebase = $request->input('url_image_firebase');
                 $user->rtn_user = $request->input('rtn_user');
-    
+
                 $user->email = $request->input('email');
                 $user->device_token = $request->input('device_token', '');
                 $user->password = Hash::make($request->input('password'));
                 $user->api_token = str_random(60);
                 $user->save();
-    
+
                 $defaultRoles = $this->roleRepository->findByField('default', '1');
                 $defaultRoles = $defaultRoles->pluck('name')->toArray();
                 $user->assignRole($defaultRoles);
-    
+
                 if (copy(public_path('images/avatar_default.png'), public_path('images/avatar_default_temp.png'))) {
                     $user->addMedia(public_path('images/avatar_default_temp.png'))
                         ->withCustomProperties(['uuid' => bcrypt(str_random())])
                         ->toMediaCollection('avatar');
                 }
             }
-            
+
         } catch (\Exception $e) {
             return $this->sendError($e->getMessage(), 401);
         }

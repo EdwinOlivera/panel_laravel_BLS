@@ -54,7 +54,7 @@ class Product extends Model implements HasMedia
         'price' => 'required|numeric|min:0',
         'description' => 'required',
         'market_id' => 'required|exists:markets,id',
-        'category_id' => 'required|exists:categories,id'
+        // 'category_id' => 'required|exists:categories,id',
     ];
 
     public $table = 'products';
@@ -69,7 +69,9 @@ class Product extends Model implements HasMedia
         'featured',
         'deliverable',
         'market_id',
-        'category_id'
+        'category_id',
+        'subdepartment_id',
+        'promotion',
     ];
     /**
      * The attributes that should be casted to native types.
@@ -88,7 +90,7 @@ class Product extends Model implements HasMedia
         'featured' => 'boolean',
         'deliverable' => 'boolean',
         'market_id' => 'integer',
-        'category_id' => 'double'
+        'category_id' => 'double',
     ];
     /**
      * New Attributes
@@ -98,7 +100,7 @@ class Product extends Model implements HasMedia
     protected $appends = [
         'custom_fields',
         'has_media',
-        'market'
+        'market',
     ];
 
     /**
@@ -171,11 +173,19 @@ class Product extends Model implements HasMedia
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     **/
+    public function categories()
+    {
+        return $this->belongsToMany(\App\Models\Category::class, 'product_categories');
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      **/
     public function options()
     {
-        return $this->hasMany(\App\Models\Option::class, 'product_id');
+        return $this->hasMany(\App\Models\Option::class, 'product_id')->orderBy('sort_id');
     }
 
     /**
@@ -183,7 +193,7 @@ class Product extends Model implements HasMedia
      **/
     public function optionGroups()
     {
-        return $this->belongsToMany(\App\Models\OptionGroup::class,'options');
+        return $this->belongsToMany(\App\Models\OptionGroup::class, 'options')->orderBy('sort_id');
     }
 
     /**
@@ -200,7 +210,7 @@ class Product extends Model implements HasMedia
      */
     public function getMarketAttribute()
     {
-        return $this->market()->first(['id', 'name', 'delivery_fee', 'address', 'phone','default_tax']);
+        return $this->market()->first(['id', 'name', 'delivery_fee', 'address', 'phone', 'default_tax', 'latitude', 'longitude', 'estimated_time', 'hour_close', 'hour_open','message_closed','enable_extra_amount','distance_per_extra','extra_amount']);
     }
 
     /**
@@ -225,13 +235,16 @@ class Product extends Model implements HasMedia
     public function applyCoupon($coupon): float
     {
         $price = $this->getPrice();
-        if(isset($coupon) && count($this->discountables) + count($this->category->discountables) + count($this->market->discountables) > 0){
+        if (isset($coupon) && count($this->discountables) + count($this->category->discountables) + count($this->market->discountables) > 0) {
             if ($coupon->discount_type == 'fixed') {
                 $price -= $coupon->discount;
             } else {
                 $price = $price - ($price * $coupon->discount / 100);
             }
-            if ($price < 0) $price = 0;
+            if ($price < 0) {
+                $price = 0;
+            }
+
         }
         return $price;
     }
@@ -241,6 +254,36 @@ class Product extends Model implements HasMedia
         return $this->morphMany('App\Models\Discountable', 'discountable');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     **/
+    public function optionGroupsList()
+    {
+        return $this->belongsToMany(\App\Models\OptionGroup::class, 'option_group_market_products');
+    }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     **/
+    public function subdepartment()
+    {
+        return $this->belongsTo(\App\Models\Subdepartment::class, 'subdepartment_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+     **/
+    public function subdepartments()
+    {
+        return $this->belongsToMany(\App\Models\Subdepartment::class, 'subdepartments_products');
+    }
+
+     /**
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+     **/
+    public function sections()
+    {
+        return $this->belongsToMany(\App\Models\Section::class, 'section_product')->orderBy('sort_id', 'asc');
+    }
 
 }

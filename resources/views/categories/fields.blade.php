@@ -12,6 +12,14 @@
     </div>
   </div>
 </div>
+ <!-- Markets ID Field -->
+ <div class="form-group row ">
+  {!! Form::label('categories[]', trans("Establecimientos"),['class' => 'col-3 control-label text-right']) !!}
+  <div class="col-9">
+      {!! Form::select('categoriesProducts[]', $markets, $marketsSelected, ['class' => 'select2 form-control', 'multiple'=>'multiple']) !!}
+      <div class="form-text text-muted">{{ trans("Seleccionar establecimientos en las que aparecera esta categoria") }}</div>
+  </div>
+</div>
 
 <!-- Description Field -->
 <div class="form-group row ">

@@ -8,13 +8,9 @@
 
 namespace App\Http\Controllers;
 
-// require_once 'XML/Serializer.php';
-// require_once 'XML/Unserializer.php';
-
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-// use DB;
 use Illuminate\Support\Facades\DB;
-use Srmklive\PayPal\Services\ExpressCheckout;
 
 class FACController extends ParentOrderController
 {
@@ -23,8 +19,6 @@ class FACController extends ParentOrderController
     {
 
     }
-
- 
 
     public function Sign($passwd, $facId, $acquirerId, $orderNumber, $amount, $currency)
     {
@@ -40,8 +34,8 @@ class FACController extends ParentOrderController
 
         $response;
 
-        $orderNumber = "izzytest".substr(md5(uniqid()), 0, 12);
-        
+        $orderNumber = "izzydelivery" . substr(md5(uniqid()), 0, 12);
+
         $response['orderNumber'] = $orderNumber;
         // fac_merchant_password
         $fac_merchant_password = DB::table('app_settings')->where('key', 'fac_merchant_password')->first();
@@ -49,6 +43,7 @@ class FACController extends ParentOrderController
         $base_url_fac = DB::table('app_settings')->where('key', 'base_url_fac')->first();
         $url_transaction_modification = DB::table('app_settings')->where('key', 'url_transaction_modification')->first();
         $base_url_fac_3d_secure = DB::table('app_settings')->where('key', 'base_url_fac_3d_secure')->first();
+        $TransactionModification = DB::table('app_settings')->where('key', 'url_transaction_modification')->first();
 
         $facId = $fac_merchant_id->value;
 
@@ -67,16 +62,17 @@ class FACController extends ParentOrderController
         $hash = sha1($stringtohash, true);
         $signature = base64_encode($hash);
         // url_transaction_modification
-        $response['transaction_modification']= $url_transaction_modification->value;
-        $response['stringtohash']= $stringtohash;
-        $response['amount']= $amount;
-        $response['password']= $password;
+        $response['transaction_modification'] = $url_transaction_modification->value;
+        $response['stringtohash'] = $stringtohash;
+        $response['amount'] = $amount;
+        $response['password'] = $password;
         $response['facId'] = $facId;
         $response['urlFAC'] = $base_url_fac->value;
+        $response['url_transaction_modification'] = $TransactionModification->value;
         $response['urlFAC3DS'] = $base_url_fac_3d_secure->value;
-        // urlFAC
         $response['signature'] = $signature;
-        $response['empresa'] = 'BLS ';
+        $response['empresa'] = 'IZZY';
+        $response['Hora'] = [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()];
 
         return $response;
 

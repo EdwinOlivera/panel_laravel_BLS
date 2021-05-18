@@ -26,7 +26,54 @@
         </div>
         <div class="card-body">
             {!! Form::open(['url' => ['settings/update'], 'method' => 'patch']) !!}
-            <div class="row">
+            
+            {{-- initial_greeting --}}
+            <div class="form-group row col-12">
+
+                {!! Form::label('initial_greeting', trans('lang.app_setting_initial_greeting'),
+                ['class' => 'col-2 control-label text-right']) !!}
+                <div class="col-10">
+                    {!! Form::text('initial_greeting', setting('initial_greeting', ''), ['class'=> 'form-control','maxlength="10"' ,'placeholder' =>trans('lang.app_setting_initial_greeting_placeholder')]) !!}
+                    <div class="form-text text-muted">
+                        {!! trans('lang.app_setting_initial_greeting_help') !!}
+                    </div>
+                </div>
+            </div>
+
+            {{-- message_home --}}
+            <div class="form-group row col-12">
+                {!! Form::label('message_home', trans('lang.app_setting_message_home'),
+                ['class' => 'col-2 control-label text-right']) !!}
+                <div class="col-10">
+                    {!! Form::text('message_home', setting('message_home', ''), ['class'=> 'form-control','maxlength="50"' , 'placeholder' => trans('lang.app_setting_message_home_placeholder')]) !!}
+                    <div class="form-text text-muted">
+                        {!! trans('lang.app_setting_message_home_help') !!}
+                    </div>
+                </div>
+            </div>
+              {{-- message_home --}}
+            <div class="form-group row col-12">
+                {!! Form::label('message_markets_closed', trans('lang.app_setting_markets_closed'),
+                ['class' => 'col-2 control-label text-right']) !!}
+                <div class="col-10">
+                    {!! Form::text('message_markets_closed', setting('message_markets_closed', ''), ['class'=> 'form-control' , 'placeholder' => trans('lang.app_setting_markets_closed_placeholder')]) !!}
+                    <div class="form-text text-muted">
+                        {!! trans('lang.app_setting_markets_closed_help') !!}
+                    </div>
+                </div>
+            </div>
+              {{-- message_home_markets --}}
+              {{-- <div class="form-group row col-12">
+                {!! Form::label('message_home_markets', trans('lang.app_setting_message_home_markets'),
+                ['class' => 'col-2 control-label text-right']) !!}
+                <div class="col-10">
+                    {!! Form::text('message_home_markets', setting('message_home_markets', ''), ['class'=> 'form-control','maxlength="30"' , 'placeholder' => trans('lang.app_setting_message_home_markets_placeholder')]) !!}
+                    <div class="form-text text-muted">
+                        {!! trans('lang.app_setting_message_home_markets_help') !!}
+                    </div>
+                </div>
+            </div> --}}
+            {{-- <div class="row">
                 <h5 class="col-12 pb-4"><i class="mr-3 fa fa-tasks"></i>{!! trans('lang.app_setting_mobile_section_builder') !!}</h5>
                 @for($i = 1 ; $i <= 12 ; $i++)
                 <!-- Theme Color Field -->
@@ -57,14 +104,13 @@
                     </div>
                 </div>
                 @endfor
-
-                <!-- Submit Field -->
-                <div class="form-group mt-4 col-12 text-right">
-                    <button type="submit" class="btn btn-{{setting('theme_color')}}">
-                        <i class="fa fa-save"></i> {{trans('lang.save')}} {{trans('lang.app_setting')}}
-                    </button>
-                    <a href="{!! route('users.index') !!}" class="btn btn-default"><i class="fa fa-undo"></i> {{trans('lang.cancel')}}</a>
-                </div>
+            </div> --}}
+            <!-- Submit Field -->
+            <div class="form-group mt-4 col-12 text-right">
+                <button type="submit" class="btn btn-{{setting('theme_color')}}">
+                    <i class="fa fa-save"></i> {{trans('lang.save')}} {{trans('lang.app_setting')}}
+                </button>
+                <a href="{!! route('users.index') !!}" class="btn btn-default"><i class="fa fa-undo"></i> {{trans('lang.cancel')}}</a>
             </div>
             {!! Form::close() !!}
             <div class="clearfix"></div>

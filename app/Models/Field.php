@@ -24,12 +24,15 @@ class Field extends Model implements HasMedia
     }
 
     public $table = 'fields';
-    
-
 
     public $fillable = [
         'name',
-        'description'
+        'description',
+        'index_relevance',
+        'message',
+        'active',
+        'message_closed',
+
     ];
 
     /**
@@ -39,8 +42,11 @@ class Field extends Model implements HasMedia
      */
     protected $casts = [
         'name' => 'string',
+        'active' => 'boolean',
         'description' => 'string',
-        'image' => 'string'
+        'image' => 'string',
+        'index_relevance' => 'int',
+        
     ];
 
     /**
@@ -60,7 +66,8 @@ class Field extends Model implements HasMedia
     protected $appends = [
         'custom_fields',
         'has_media',
-        'markets'
+        // 'galleriesMarket',
+        // 'markets',
     ];
 
     /**
@@ -89,33 +96,33 @@ class Field extends Model implements HasMedia
      * @param string $conversion
      * @return string url
      */
-    public function getFirstMediaUrl($collectionName = 'default',$conversion = '')
+    public function getFirstMediaUrl($collectionName = 'default', $conversion = '')
     {
         $url = $this->getFirstMediaUrlTrait($collectionName);
         $array = explode('.', $url);
         $extension = strtolower(end($array));
-        if (in_array($extension,config('medialibrary.extensions_has_thumb'))) {
-            return asset($this->getFirstMediaUrlTrait($collectionName,$conversion));
-        }else{
-            return asset(config('medialibrary.icons_folder').'/'.$extension.'.png');
+        if (in_array($extension, config('medialibrary.extensions_has_thumb'))) {
+            return asset($this->getFirstMediaUrlTrait($collectionName, $conversion));
+        } else {
+            return asset(config('medialibrary.icons_folder') . '/' . $extension . '.png');
         }
     }
 
     public function getCustomFieldsAttribute()
     {
-        $hasCustomField = in_array(static::class,setting('custom_field_models',[]));
-        if (!$hasCustomField){
+        $hasCustomField = in_array(static::class, setting('custom_field_models', []));
+        if (!$hasCustomField) {
             return [];
         }
         $array = $this->customFieldsValues()
-            ->join('custom_fields','custom_fields.id','=','custom_field_values.custom_field_id')
-            ->where('custom_fields.in_table','=',true)
+            ->join('custom_fields', 'custom_fields.id', '=', 'custom_field_values.custom_field_id')
+            ->where('custom_fields.in_table', '=', true)
             ->get()->toArray();
 
-        return convertToAssoc($array,'name');
+        return convertToAssoc($array, 'name');
     }
 
-        /**
+    /**
      * Add Media to api results
      * @return bool
      */
@@ -132,11 +139,29 @@ class Field extends Model implements HasMedia
         return $this->belongsToMany(\App\Models\Market::class, 'market_fields');
     }
 
-        /**
-    * @return \Illuminate\Database\Eloquent\Collection
-    */
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
     public function getMarketsAttribute()
     {
-        return $this->markets()->get(['markets.id', 'markets.name','markets.latitude','markets.description','markets.information','markets.longitude','markets.delivery_range','markets.available_for_delivery']);
+        // return $this->markets()->get(['markets.id', 'markets.name', 'markets.latitude', 'markets.description', 'markets.information', 'markets.longitude', 'markets.delivery_range', 'markets.available_for_delivery']);
+        return $this->markets()->get(['markets.id', 'markets.name', 'markets.latitude',  'markets.longitude',  'markets.available_for_delivery']);
+    }
+
+        /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     **/
+    public function galleriesMarket()
+    {
+        return $this->hasMany(\App\Models\Gallery::class, 'market_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getGalleriesMarketAttribute()
+    {
+        // category_id
+        return $this->galleriesMarket()->get(['galleries.id']);
     }
 }

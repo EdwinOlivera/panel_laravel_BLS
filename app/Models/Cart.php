@@ -20,16 +20,18 @@ class Cart extends Model
 {
 
     public $table = 'carts';
-    
-
 
     public $fillable = [
         'product_id',
         'user_id',
         'price_select',
         'total_pay',
+        'instrucciones',
+        'establecimiento',
         'enable_factura',
-        'quantity'
+        'quantity',
+        'coupon_valid',
+
     ];
 
     /**
@@ -41,9 +43,11 @@ class Cart extends Model
         'enable_factura' => 'boolean',
         'product_id' => 'integer',
         'user_id' => 'integer',
-        'price_select' =>'double',
-        'total_pay' =>'double',
-        'quantity' => 'integer'
+        'price_select' => 'double',
+        'total_pay' => 'double',
+        'quantity' => 'integer',
+        'coupon_valid' => "boolean",
+
     ];
 
     /**
@@ -53,8 +57,9 @@ class Cart extends Model
      */
     public static $rules = [
         'product_id' => 'required|exists:products,id',
-        
-        'user_id' => 'required|exists:users,id'
+        'price_select' => 'required',
+        'total_pay' => 'required',
+        'user_id' => 'required|exists:users,id',
     ];
 
     /**
@@ -63,7 +68,7 @@ class Cart extends Model
      * @var array
      */
     protected $appends = [
-        'custom_fields'
+        'custom_fields',
     ];
 
     public function customFieldsValues()
@@ -73,16 +78,16 @@ class Cart extends Model
 
     public function getCustomFieldsAttribute()
     {
-        $hasCustomField = in_array(static::class,setting('custom_field_models',[]));
-        if (!$hasCustomField){
+        $hasCustomField = in_array(static::class, setting('custom_field_models', []));
+        if (!$hasCustomField) {
             return [];
         }
         $array = $this->customFieldsValues()
-            ->join('custom_fields','custom_fields.id','=','custom_field_values.custom_field_id')
-            ->where('custom_fields.in_table','=',true)
+            ->join('custom_fields', 'custom_fields.id', '=', 'custom_field_values.custom_field_id')
+            ->where('custom_fields.in_table', '=', true)
             ->get()->toArray();
 
-        return convertToAssoc($array,'name');
+        return convertToAssoc($array, 'name');
     }
 
     /**
@@ -107,5 +112,21 @@ class Cart extends Model
     public function options()
     {
         return $this->belongsToMany(\App\Models\Option::class, 'cart_options');
+    }
+
+        /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     **/
+    public function optiongroups()
+    {
+        return $this->belongsToMany(\App\Models\OptionGroup::class, 'cart_options');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     **/
+    public function orders()
+    {
+        return $this->belongsToMany(\App\Models\Order::class, 'carts_order');
     }
 }

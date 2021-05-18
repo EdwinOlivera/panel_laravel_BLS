@@ -32,17 +32,15 @@ class Category extends Model implements HasMedia
     }
 
     public $table = 'categories';
-    
 
     public function discountables()
     {
         return $this->morphMany('App\Models\Discountable', 'discountable');
     }
 
-
     public $fillable = [
         'name',
-        'description'
+        'description',
     ];
 
     /**
@@ -53,7 +51,7 @@ class Category extends Model implements HasMedia
     protected $casts = [
         'name' => 'string',
         'description' => 'string',
-        'image' => 'string'
+        'image' => 'string',
     ];
 
     /**
@@ -63,7 +61,7 @@ class Category extends Model implements HasMedia
      */
     public static $rules = [
         'name' => 'required',
-        'description' => 'required'
+        'description' => 'required',
     ];
 
     /**
@@ -73,8 +71,8 @@ class Category extends Model implements HasMedia
      */
     protected $appends = [
         'custom_fields',
-        'has_media'
-        
+        'has_media',
+
     ];
 
     /**
@@ -103,30 +101,30 @@ class Category extends Model implements HasMedia
      * @param string $conversion
      * @return string url
      */
-    public function getFirstMediaUrl($collectionName = 'default',$conversion = '')
+    public function getFirstMediaUrl($collectionName = 'default', $conversion = '')
     {
         $url = $this->getFirstMediaUrlTrait($collectionName);
         $array = explode('.', $url);
         $extension = strtolower(end($array));
-        if (in_array($extension,config('medialibrary.extensions_has_thumb'))) {
-            return asset($this->getFirstMediaUrlTrait($collectionName,$conversion));
-        }else{
-            return asset(config('medialibrary.icons_folder').'/'.$extension.'.png');
+        if (in_array($extension, config('medialibrary.extensions_has_thumb'))) {
+            return asset($this->getFirstMediaUrlTrait($collectionName, $conversion));
+        } else {
+            return asset(config('medialibrary.icons_folder') . '/' . $extension . '.png');
         }
     }
 
     public function getCustomFieldsAttribute()
     {
-        $hasCustomField = in_array(static::class,setting('custom_field_models',[]));
-        if (!$hasCustomField){
+        $hasCustomField = in_array(static::class, setting('custom_field_models', []));
+        if (!$hasCustomField) {
             return [];
         }
         $array = $this->customFieldsValues()
-            ->join('custom_fields','custom_fields.id','=','custom_field_values.custom_field_id')
-            ->where('custom_fields.in_table','=',true)
+            ->join('custom_fields', 'custom_fields.id', '=', 'custom_field_values.custom_field_id')
+            ->where('custom_fields.in_table', '=', true)
             ->get()->toArray();
 
-        return convertToAssoc($array,'name');
+        return convertToAssoc($array, 'name');
     }
 
     /**
@@ -138,22 +136,15 @@ class Category extends Model implements HasMedia
         return $this->hasMedia('image') ? true : false;
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     **/
-    public function products()
-    {
-        return $this->hasMany(\App\Models\Product::class, 'category_id');
-    }
 
-//    /**
-//     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-//     **/
-//    public function restrictMarkets()
-//    {
-//
-//        return $this->belongsToMany(\App\Models\Market::class, 'products')->select(array('markets.id', 'markets.name'));
-//    }
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     **/
+    public function restrictMarkets()
+    {
+
+        return $this->belongsToMany(\App\Models\Market::class, 'products')->select(array('markets.id', 'markets.name'));
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -163,5 +154,20 @@ class Category extends Model implements HasMedia
         return $this->belongsToMany(\App\Models\Market::class, 'products');
     }
 
-    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     **/
+    public function categoriesProducts()
+    {
+        return $this->belongsToMany(\App\Models\Market::class, 'categoriesproducts');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     **/
+    public function products()
+    {
+        return $this->belongsToMany(\App\Models\Product::class, 'product_categories');
+    }
+
 }

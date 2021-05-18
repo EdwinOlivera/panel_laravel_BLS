@@ -43,6 +43,9 @@ class Option extends Model implements HasMedia
         'description',
         'price',
         'product_id',
+        'active',
+        'default',
+        'market_id',
         'option_group_id'
     ];
 
@@ -56,6 +59,7 @@ class Option extends Model implements HasMedia
         'image' => 'string',
         'description' => 'string',
         'price' => 'double',
+        'active' => 'boolean',
         'product_id' => 'integer',
         'option_group_id' => 'integer'
     ];
@@ -67,9 +71,10 @@ class Option extends Model implements HasMedia
      */
     public static $rules = [
         'name' => 'required',
+        'market_id' => 'required',
         'price' => 'nullable|numeric|min:0',
-        'product_id' => 'required|exists:products,id',
-        'option_group_id' => 'required|exists:option_groups,id'
+        // 'product_id' => 'required|exists:products,id',
+        // 'option_group_id' => 'required|exists:option_groups,id'
     ];
 
     /**
@@ -160,5 +165,11 @@ class Option extends Model implements HasMedia
         return $this->belongsTo(\App\Models\OptionGroup::class, 'option_group_id', 'id');
     }
 
-    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     **/
+    public function optionGroupList()
+    {
+        return $this->belongsToMany(\App\Models\OptionGroup::class, 'options_by_options_groups');
+    }
 }

@@ -9,7 +9,6 @@
 
 namespace App\Http\Controllers\API;
 
-
 use App\Criteria\Products\NearCriteria;
 use App\Criteria\Products\ProductsOfCategoriesCriteria;
 use App\Criteria\Products\ProductsOfFieldsCriteria;
@@ -17,10 +16,12 @@ use App\Criteria\Products\TrendingWeekCriteria;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Repositories\CustomFieldRepository;
+use App\Repositories\OptionGroupRepository;
+use App\Repositories\OptionRepository;
 use App\Repositories\ProductRepository;
 use App\Repositories\UploadRepository;
-use Flash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use InfyOm\Generator\Criteria\LimitOffsetCriteria;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Prettus\Repository\Exceptions\RepositoryException;
@@ -34,6 +35,13 @@ class ProductAPIController extends Controller
 {
     /** @var  ProductRepository */
     private $productRepository;
+
+    /** @var  OptionGroupRepository */
+    private $optionGroupRepository;
+
+    /** @var  OptionRepository */
+    private $optionRepository;
+
     /**
      * @var CustomFieldRepository
      */
@@ -43,13 +51,15 @@ class ProductAPIController extends Controller
      */
     private $uploadRepository;
 
-
-    public function __construct(ProductRepository $productRepo, CustomFieldRepository $customFieldRepo, UploadRepository $uploadRepo)
+    public function __construct(ProductRepository $productRepo, OptionRepository $optionRepo, OptionGroupRepository $optionGroupRepo, CustomFieldRepository $customFieldRepo, UploadRepository $uploadRepo)
     {
         parent::__construct();
         $this->productRepository = $productRepo;
+        $this->optionRepository = $optionRepo;
         $this->customFieldRepository = $customFieldRepo;
         $this->uploadRepository = $uploadRepo;
+        $this->optionGroupRepository = $optionGroupRepo;
+
     }
 
     /**
@@ -61,7 +71,7 @@ class ProductAPIController extends Controller
      */
     public function index(Request $request)
     {
-        try{
+        try {
             $this->productRepository->pushCriteria(new RequestCriteria($request));
             $this->productRepository->pushCriteria(new LimitOffsetCriteria($request));
             $this->productRepository->pushCriteria(new ProductsOfFieldsCriteria($request));
@@ -71,15 +81,26 @@ class ProductAPIController extends Controller
                 $this->productRepository->pushCriteria(new NearCriteria($request));
             }
 
-//            $this->productRepository->orderBy('closed');
-//            $this->productRepository->orderBy('area');
             $products = $this->productRepository->all();
+
+            $productsArray = $products->toArray();
+            $productsFinal = [];
+            $valueActiveProduct = [];
+            if (!isset($request['no_filter'])) {
+                foreach ($productsArray as $product) {
+                    $valueActiveProduct = DB::table('product_categories')->where('product_id', '=', $product['id'])->get('active');
+                    if ($valueActiveProduct[0]->active) {
+                        $productsFinal[] = $product;
+                    }
+                }
+                $productsArray = $productsFinal;
+            }
 
         } catch (RepositoryException $e) {
             return $this->sendError($e->getMessage());
         }
 
-        return $this->sendResponse($products->toArray(), 'Products retrieved successfully');
+        return $this->sendResponse($productsArray, 'Productos enviados successfully');
     }
 
     /**
@@ -91,7 +112,26 @@ class ProductAPIController extends Controller
      */
     public function categories(Request $request)
     {
-        try{
+        $idsCategories = [];
+        if (isset($request['categories'])) {
+            foreach ($request['categories'] as $idCategory) {
+                if ((int) $idCategory != 0) {
+                    $idsCategories[] = (int) $idCategory;
+                }
+            }
+        }
+        $marketId = '0';
+        if (isset($request['marketid'])) {
+            $marketId = $request['marketid'];
+        }
+        $promo = '0';
+        if (isset($request['promo'])) {
+            $promo = $request['promo'];
+        }
+        try {
+            if (count($idsCategories) != 0) {
+                $request['categories'] = ['0'];
+            }
             $this->productRepository->pushCriteria(new RequestCriteria($request));
             $this->productRepository->pushCriteria(new LimitOffsetCriteria($request));
             $this->productRepository->pushCriteria(new ProductsOfFieldsCriteria($request));
@@ -103,7 +143,64 @@ class ProductAPIController extends Controller
             return $this->sendError($e->getMessage());
         }
 
-        return $this->sendResponse($products->toArray(), 'Products retrieved successfully');
+        // return $this->sendResponse($products->toArray(), 'Products retrieved successfully');
+        $productsFinal = [];
+
+        $productsArray = $products->toArray();
+        if (!isset($request['no_filter'])) {
+            if ($promo) {
+                return $this->sendResponse($productsArray, 'Promos enviados');
+
+            } else {
+
+                if (count($idsCategories) > 0) {
+                    $idMarket = $marketId;
+                    $valueActiveCategory = DB::table('categoriesproducts')->where('market_id', '=', $idMarket)->whereIn('category_id', $idsCategories)->pluck('active', 'category_id');
+                    $idsProducts = DB::table('products')->where('market_id', '=', $idMarket)->get(['featured', 'id'])->toArray();
+                    $algo = [];
+                    foreach ($idsProducts as $idP) {
+                        if ($idP->featured) {
+                            $algo[] = $idP->id;
+                        }
+                    }
+                    $datosProductosRaw = DB::table('product_categories')->whereIn('category_id', $idsCategories)->whereIn('product_id', $algo)->where('active', '1')->get();
+                    $idsProducts = [];
+                    foreach ($datosProductosRaw as $idPR) {
+                        if ($idPR->active) {
+                            $idsProducts[] = $idPR->product_id;
+                        }
+                    }
+                    $productsFilter = $this->productRepository->whereIn('id', $idsProducts)->get();
+                    $productsFinal = $productsFilter;
+
+                } else if (count($productsArray) != 0) {
+
+                    $idMarket = $productsArray[0]['market_id'];
+                    $valueActiveCategory = DB::table('categoriesproducts')->where('market_id', '=', $idMarket)->pluck('active', 'category_id');
+                    $idsCategory = [];
+                    foreach ($valueActiveCategory as $categoryID => $id) {
+                        $idsCategory[] = $categoryID;
+                    }
+                    $productsTmp = [];
+                    foreach ($productsArray as $product) {
+                        $valueActiveProduct = DB::table('product_categories')->whereIn('category_id', $idsCategory)->where('product_id', '=', $product['id'])->pluck('active');
+                        foreach ($valueActiveProduct as $value) {
+                            if ($value) {
+                                $productsTmp[] = $product;
+                            }
+                        }
+                    }
+
+                    $productsFinal = $productsTmp;
+
+                }
+            }
+        } else {
+            $productsFinal = $productsArray;
+
+        }
+
+        return $this->sendResponse($productsFinal, 'Productos filtrados enviados');
     }
 
     /**
@@ -117,21 +214,98 @@ class ProductAPIController extends Controller
     public function show(Request $request, $id)
     {
         /** @var Product $product */
-        if (!empty($this->productRepository)) {
-            try{
-                $this->productRepository->pushCriteria(new RequestCriteria($request));
-                $this->productRepository->pushCriteria(new LimitOffsetCriteria($request));
-            } catch (RepositoryException $e) {
-                return $this->sendError($e->getMessage());
+
+        if (isset($request['no_filter'])) {
+            if (!empty($this->productRepository)) {
+                try {
+                    $this->productRepository->pushCriteria(new RequestCriteria($request));
+                    $this->productRepository->pushCriteria(new LimitOffsetCriteria($request));
+                } catch (RepositoryException $e) {
+                    return $this->sendError($e->getMessage());
+                }
+
+                $product = $this->productRepository->findWithoutFail($id);
             }
-            $product = $this->productRepository->findWithoutFail($id);
+
+            if (empty($product)) {
+                return $this->sendError('Product not found');
+            }
+            $productArray = $product->toArray();
+            return $this->sendResponse($productArray, 'Producto enviado exitosamente, sin filtrar');
+        } else {
+            $valueActiveProduct = DB::table('product_categories')->where('product_id', '=', $id)->get('active');
+
+            if ($valueActiveProduct[0]->active) {
+                if (!empty($this->productRepository)) {
+                    try {
+                        $this->productRepository->pushCriteria(new RequestCriteria($request));
+                        $this->productRepository->pushCriteria(new LimitOffsetCriteria($request));
+                    } catch (RepositoryException $e) {
+                        return $this->sendError($e->getMessage());
+                    }
+                    // Desde aqui se puede conseguir las opciones y grupos de opciones
+                    // "option_groups"
+                    $product = $this->productRepository->findWithoutFail($id);
+                }
+
+                if (empty($product)) {
+                    return $this->sendError('Product not found');
+                }
+                $productArray = $product->toArray();
+
+                $valueActiveOptionsGroup = [];
+                $idOptionsGroup = DB::table('option_group_market_products')->where('product_id', '=', $productArray['id'])->pluck('option_group_id')->toArray();
+                $optionsGroupRaw = $this->optionGroupRepository->whereIn('id', $idOptionsGroup)->orderBy('sort_id')->get()->toArray();
+
+                $optionsFinal = [];
+                $optionsGroupFinal = [];
+                $optionsGroupArray = $optionsGroupRaw;
+                $valueActiveOptionsGroup = DB::table('option_group_market_products')->where('product_id', '=', $productArray['id'])->pluck('active', 'option_group_id')->toArray();
+
+                foreach ($optionsGroupArray as $optionsGroup) {
+                    if (isset($valueActiveOptionsGroup[$optionsGroup['id']])) {
+                        if ($valueActiveOptionsGroup[$optionsGroup['id']]) {
+                            $optionsGroup['active'] = true;
+                            $optionsGroupFinal[] = $optionsGroup;
+                        }
+                    }
+                }
+                $algo = [];
+                $idsOptions = [];
+                foreach ($idOptionsGroup as $idOG) {
+                    $objestOptions = DB::table('options_by_options_groups')->where('option_group_id', '=', $idOG)->get()->toArray();
+                    foreach ($objestOptions as $valueOption) {
+                        if ($valueOption->active) {
+                            $idsOptions[] = $valueOption->option_id;
+                        }
+
+                    }
+                }
+
+                $optionsRaw = $this->optionRepository->whereIn('id', $idsOptions)->orderBy('sort_id')->get()->toArray();
+
+                foreach ($idOptionsGroup as $idOG) {
+                    $valuesActiveOptions = DB::table('options_by_options_groups')->where('option_group_id', '=', $idOG)->pluck('active', 'option_id')->toArray();
+                    $optionByOptionsGroup = DB::table('options_by_options_groups')->where('option_group_id', '=', $idOG)->pluck('option_group_id', 'option_id')->toArray();
+
+                    foreach ($optionsRaw as $option) {
+                        if (isset($valuesActiveOptions[$option['id']])) {
+                            if ($valuesActiveOptions[$option['id']]) {
+                                $option['option_group_id'] = $optionByOptionsGroup[$option['id']];
+                                $optionsFinal[] = $option;
+                            }
+                        }
+                    }
+                }
+
+                $productArray['options'] = $optionsFinal;
+                $productArray['option_groups'] = $optionsGroupFinal;
+
+                return $this->sendResponse($productArray, 'Producto enviado exitosamente');
+            }
+            return $this->sendResponse([], 'No se encontro el producto');
         }
 
-        if (empty($product)) {
-            return $this->sendError('Product not found');
-        }
-
-        return $this->sendResponse($product->toArray(), 'Product retrieved successfully');
     }
 
     /**
@@ -176,6 +350,9 @@ class ProductAPIController extends Controller
             return $this->sendError('Product not found');
         }
         $input = $request->all();
+        DB::table('product_categories')->where('product_id', '=', $id)->update([
+            "active" => $input['featured'],
+        ]);
         $customFields = $this->customFieldRepository->findByField('custom_field_model', $this->productRepository->model());
         try {
             $product = $this->productRepository->update($input, $id);

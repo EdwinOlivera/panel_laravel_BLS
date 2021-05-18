@@ -21,7 +21,7 @@
     <div class="form-group row ">
         {!! Form::label('descripcion_a', trans("Descripción"), ['class' => 'col-3 control-label text-right']) !!}
         <div class="col-9">
-            {!! Form::text('descripcion_a', null, ['class' => 'form-control','readonly','placeholder'=> trans("lang.market_name_placeholder")]) !!}
+            {!! Form::text('descripcion_a', null, ['class' => 'form-control','readonly','placeholder'=> trans("Descripción del árticulo")]) !!}
             <div class="form-text text-muted">
                 {{ trans("Descripcion del lugar a entregar") }}
             </div>
@@ -124,7 +124,7 @@
         <div class="col-9">
             {!! Form::text('tel', null, ['class' => 'form-control','readonly','placeholder'=> trans("lang.market_name_placeholder")]) !!}
             <div class="form-text text-muted">
-                {{ trans("Número Telefonico del cliente") }}
+                {{ trans("Numero Telefonico del cliente") }}
             </div>
         </div>
     </div>
@@ -147,15 +147,15 @@
 
 
 
-    <div class="form-group row ">
+    {{-- <div class="form-group row ">
         {!! Form::label('descripcion_b', trans("Descripción"), ['class' => 'col-3 control-label text-right']) !!}
         <div class="col-9">
-            {!! Form::text('descripcion_b', null, ['class' => 'form-control','readonly','placeholder'=> trans("lang.market_name_placeholder")]) !!}
+            {!! Form::text('descripcion_b', null, ['class' => 'form-control','readonly','placeholder'=> trans("Descripción del árticulo")]) !!}
             <div class="form-text text-muted">
                 {{ trans("Descripcion del lugar de Entrega") }}
             </div>
         </div>
-    </div>
+    </div> --}}
     <div class="form-group row ">
         {!! Form::label('hacer_repartidor_b', trans("Hacer repartidor en el lugar"), ['class' => 'col-3 control-label text-right']) !!}
         <div class="col-9">

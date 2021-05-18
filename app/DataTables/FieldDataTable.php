@@ -40,9 +40,6 @@ class FieldDataTable extends DataTable
             ->editColumn('updated_at', function ($field) {
                 return getDateColumn($field, 'updated_at');
             })
-            ->editColumn('markets', function ($field) {
-                return getLinksColumnByRouteName($field->markets, 'markets.edit', 'id', 'name');
-            })
             ->addColumn('action', 'fields.datatables_actions')
             ->rawColumns(array_merge($columns, ['action']));
 
@@ -63,21 +60,25 @@ class FieldDataTable extends DataTable
 
             ],
             [
+                'data' => 'message',
+                'title' => trans('Mensaje'),
+            ],
+            [
+                'data' => 'index_relevance',
+                'title' => trans('Índice'),
+            ],
+
+            [
                 'data' => 'image',
                 'title' => trans('lang.field_image'),
                 'searchable' => false, 'orderable' => false, 'exportable' => false, 'printable' => false,
             ],
-            (auth()->check() && auth()->user()->hasAnyRole(['admin', 'manager'])) ? [
-                'data' => 'markets',
-                'title' => trans('lang.field_markets'),
-                'searchable' => false,
-
-            ] : null,
+           
             [
                 'data' => 'updated_at',
                 'title' => trans('lang.field_updated_at'),
                 'searchable' => false,
-            ]
+            ],
         ];
         $columns = array_filter($columns);
 
@@ -104,7 +105,7 @@ class FieldDataTable extends DataTable
      */
     public function query(Field $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->orderBy('index_relevance');
     }
 
     /**
@@ -117,12 +118,12 @@ class FieldDataTable extends DataTable
         return $this->builder()
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->addAction(['title'=>trans('lang.actions'),'width' => '80px', 'printable' => false, 'responsivePriority' => '100'])
+            ->addAction(['title' => trans('lang.actions'), 'width' => '80px', 'printable' => false, 'responsivePriority' => '100'])
             ->parameters(array_merge(
                 config('datatables-buttons.parameters'), [
                     'language' => json_decode(
                         file_get_contents(base_path('resources/lang/' . app()->getLocale() . '/datatable.json')
-                        ), true)
+                        ), true),
                 ]
             ));
     }

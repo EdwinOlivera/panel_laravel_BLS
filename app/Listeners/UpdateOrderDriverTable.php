@@ -44,7 +44,7 @@ class UpdateOrderDriverTable
             $this->driverRepository->pushCriteria(new FilterByUserCriteria($event->updatedOrder->driver->id));
             $driver = $this->driverRepository->first();
             if (!empty($driver)) {
-                if ($event->updatedOrder->payment->status == 'Paid' && $event->updatedOrder->orderStatus->id == 5) {
+                if ($event->updatedOrder->payment->status == 'Paid' && $event->updatedOrder->orderStatus->id == 4) {
                     $driver->total_orders++;
                     $driver->earning += $event->updatedOrder->delivery_fee * $driver->delivery_fee / 100;
                     $driver->save();

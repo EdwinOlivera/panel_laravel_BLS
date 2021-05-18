@@ -4,7 +4,7 @@
     <div class="form-group row ">
         {!! Form::label('monto_base', trans("Monto base"), ['class' => 'col-5 control-label text-right']) !!}
         <div class="col-6">
-            {!! Form::number('monto_base', null, ['class' => 'form-control', 'min=20','placeholder'=> trans("50")]) !!}
+            {!! Form::number('monto_base', null, ['class' => 'form-control', 'min=20','placeholder'=> trans("20")]) !!}
             <div class="form-text text-muted">
                 {{ trans("Monto inicial a cobrar por encargo") }}
             </div>
@@ -14,7 +14,7 @@
     <div class="form-group row ">
         {!! Form::label('monto_extra', trans("Monto Extra por fuera de rango"), ['class' => 'col-5 control-label text-right']) !!}
         <div class="col-6">
-            {!! Form::number('monto_extra', null, ['class' => 'form-control', 'min=0','placeholder'=> trans("45")]) !!}
+            {!! Form::number('monto_extra', null, ['class' => 'form-control', 'min=0','placeholder'=> trans("10")]) !!}
             <div class="form-text text-muted">
                 {{ trans("Monto extra que se cobrar si se pasa de un límite  de distancia entre Puntos") }}
             </div>
@@ -40,7 +40,7 @@
     <div class="form-group row ">
         {!! Form::label('rango_minimo', trans("Rango máximo"), ['class' => 'col-5 control-label text-right']) !!}
         <div class="col-6">
-            {!! Form::number('rango_minimo', null, ['class' => 'form-control', 'min=4','placeholder'=> trans("lang. market_name_placeholder")]) !!}
+            {!! Form::number('rango_minimo', null, ['class' => 'form-control', 'min=1','placeholder'=> trans("5")]) !!}
             <div class="form-text text-muted">
                 {{ trans("Distancia máxima (km) entre puntos antes de cobrar el monto extra. ") }}
             </div>

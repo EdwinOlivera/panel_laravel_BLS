@@ -96,7 +96,6 @@ class EncargoSetting extends Controller
         // $encargo_settings= DB::table('encargo_settings')->get();
         // $encargo_setting = Encargo_setting::all();
         // $encargo_setting = Encargo_setting::where("estado","=",1)->first()->toArray();
-
         $user = $this->userRepository->getByCriteria(new ClientsCriteria())->pluck('name', 'id');
         $driver = $this->userRepository->getByCriteria(new DriversCriteria())->pluck('name', 'id');
 
@@ -107,7 +106,8 @@ class EncargoSetting extends Controller
             $customFields = $this->customFieldRepository->findByField('custom_field_model', $this->EncargoRepository->model());
             $html = generateCustomField($customFields);
         }
-        return view('encargos.create')->with("customFields", isset($html) ? $html : false)->with("user", $user)->with("driver", $driver)->with("encargoStatus", $encargoStatus);
+        
+        return view('encargos.create')->with("customFields", isset($html) ? $html : false)->with("encargoStatus", $encargoStatus);
     }
 
     /**
@@ -265,6 +265,7 @@ class EncargoSetting extends Controller
         } catch (ValidatorException $e) {
             Flash::error($e->getMessage());
         }
+
 
         // Flash::success(__('lang.updated_successfully', ['operator' => __('lang.order')]));
 

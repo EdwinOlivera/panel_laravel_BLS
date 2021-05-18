@@ -48,6 +48,7 @@ Route::prefix('manager')->group(function () {
 });
 
 Route::post('login', 'API\UserAPIController@login');
+Route::post('login/driver', 'API\UserAPIController@loginDriver');
 Route::post('loginWithFB', 'API\UserAPIController@loginWithFacebook');
 Route::post('registerWitFB', 'API\UserAPIController@registerWithFacebook');
 Route::post('loginWithGoogle', 'API\UserAPIController@loginWithGoogle');
@@ -61,16 +62,24 @@ Route::get('encargos_settings', 'API\UserAPIController@encargos_settings');
 
 Route::resource('fields', 'API\FieldAPIController');
 Route::resource('categories', 'API\CategoryAPIController');
+Route::get('categories/market/{id}', 'API\CategoryAPIController@getCategoriesMarket');
 Route::resource('markets', 'API\MarketAPIController');
+Route::resource('drivers_alt', 'API\DriverAPIController');
+Route::resource('departments', 'API\DepartmentAPIController');
+Route::resource('subdepartments', 'API\SubdepartmentAPIController');
+Route::resource('sections', 'API\SectionAPIController');
 
 Route::resource('faq_categories', 'API\FaqCategoryAPIController');
 Route::get('products/categories', 'API\ProductAPIController@categories');
+Route::post('products/update/{id}', 'API\ProductAPIController@update');
 Route::resource('products', 'API\ProductAPIController');
 Route::resource('galleries', 'API\GalleryAPIController');
 Route::resource('product_reviews', 'API\ProductReviewAPIController');
 
 Route::resource('faqs', 'API\FaqAPIController');
 Route::resource('market_reviews', 'API\MarketReviewAPIController');
+Route::post('market/update/{id}', 'API\MarketAPIController@update');
+
 Route::resource('currencies', 'API\CurrencyAPIController');
 Route::resource('slides', 'API\SlideAPIController')->except([
     'show',
@@ -80,12 +89,14 @@ Route::resource('option_groups', 'API\OptionGroupAPIController');
 
 Route::resource('options', 'API\OptionAPIController');
 
+Route::resource('polygon_zone', 'API\PolygonZoneAPIController');
+
 Route::middleware('auth:api')->group(function () {
     Route::group(['middleware' => ['role:driver']], function () {
         Route::prefix('driver')->group(function () {
             Route::resource('orders', 'API\OrderAPIController');
             //Nuevo
-            Route::resource('encargos', 'API\EncargoAPIController');
+            // Route::resource('encargos', 'API\EncargoAPIController');
 
             Route::resource('notifications', 'API\NotificationAPIController');
             Route::post('users/{id}', 'API\UserAPIController@update');
@@ -113,7 +124,11 @@ Route::middleware('auth:api')->group(function () {
     Route::resource('favorites', 'API\FavoriteAPIController');
 
     Route::resource('orders', 'API\OrderAPIController');
-    Route::resource('product_orders', 'API\ProductOrderAPIController');
+    Route::get('orden/verificar', 'API\OrderAPIController@revisarOrden');
+    Route::get('orden/check', 'API\OrderAPIController@checkStatusOrder');
+    Route::get('orden/check_user', 'API\OrderAPIController@checkStatusOrderUser');
+
+    Route::resource('product_orders', 'API\ProductOrderAPIControllerFixed');
 
     Route::resource('notifications', 'API\NotificationAPIController');
 

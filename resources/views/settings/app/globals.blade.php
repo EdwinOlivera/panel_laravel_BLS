@@ -23,7 +23,7 @@
                 @if(!env('APP_DEMO',false))
                     <div class="ml-auto d-inline-flex">
                         <li class="nav-item">
-                            <a class="nav-link pt-1" href="{{url('settings/clear-cache')}}"><i class="fa fa-trash-o"></i> {{trans('lang.app_setting_clear_cache')}}
+                            <a class="nav-link pt-1" href="{{url('settings/clear-cache')}}"><i class="fas fa-trash-o"></i> {{trans('lang.app_setting_clear_cache')}}
                             </a>
                         </li>
                         @if($containsUpdate)

@@ -23,6 +23,7 @@ class ProductOrderRepository extends BaseRepository
         'price',
         'quantity',
         'product_id',
+        'featured',
         'order_id'
     ];
 

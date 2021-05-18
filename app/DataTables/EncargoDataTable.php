@@ -50,9 +50,9 @@ class EncargoDataTable extends DataTable
             ->editColumn('punto_a', function ($encargo) {
                 return $encargo->direccion_a;
             })
-            ->editColumn('pagada', function ($encargo) {
-                return getBooleanColumn($encargo, 'pagada');
-            })
+            // ->editColumn('pagada', function ($encargo) {
+            //     return getBooleanColumn($encargo, 'pagada');
+            // })
             ->editColumn('active', function ($encargo) {
                 return getBooleanColumn($encargo, 'active');
             })
@@ -112,12 +112,12 @@ class EncargoDataTable extends DataTable
                 'title' => trans('lang.order_active'),
 
             ],
-            [
-                'data' => 'pagada',
-                'name' => 'pagada',
-                'title' => trans('Pagada'),
+            // [
+            //     'data' => 'pagada',
+            //     'name' => 'pagada',
+            //     'title' => trans('Pagada'),
 
-            ],
+            // ],
             [
                 'data' => 'assigned',
                 'name' => 'assigned',

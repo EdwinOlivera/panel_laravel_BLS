@@ -55,7 +55,12 @@ class User extends Authenticatable implements HasMedia
         'device_token',
         'url_image_firebase',
         'isAdmin',
-
+        'rtn_user',
+        'accepting_shipments',
+        'online',
+        'phone',
+        'last_login',
+        'accept_delivery',
     ];
     /**
      * The attributes that should be casted to native types.
@@ -68,7 +73,9 @@ class User extends Authenticatable implements HasMedia
         'password' => 'string',
         'api_token' => 'string',
         'device_token' => 'string',
-        'remember_token' => 'string'
+        'remember_token' => 'string',
+        'online' => 'boolean',
+        'accept_delivery' => 'boolean',
     ];
     /**
      * New Attributes
@@ -77,7 +84,8 @@ class User extends Authenticatable implements HasMedia
      */
     protected $appends = [
         'custom_fields',
-        'has_media'
+        'delivery_address',
+        'has_media',
     ];
 
     /**
@@ -131,7 +139,7 @@ class User extends Authenticatable implements HasMedia
             } else {
                 return asset(config('medialibrary.icons_folder') . '/' . $extension . '.png');
             }
-        }else{
+        } else {
             return asset('images/avatar_default.png');
         }
     }
@@ -179,6 +187,23 @@ class User extends Authenticatable implements HasMedia
     public function cart()
     {
         return $this->hasMany(\App\Models\Cart::class, 'user_id');
+    }
+
+/**
+ * get market attribute
+ * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Relations\BelongsTo|object|null
+ */
+    public function getDeliveryAddressAttribute()
+    {
+        return $this->DeliveryAddress()->get(['id', 'description', 'longitude', 'latitude', 'is_default', 'address', 'reference', 'label', 'place_definition']);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     **/
+    public function DeliveryAddress()
+    {
+        return $this->HasMany(\App\Models\DeliveryAddress::class, 'user_id', 'id');
     }
 
 }

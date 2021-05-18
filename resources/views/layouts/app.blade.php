@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{setting('language','en')}}" dir="ltr">
 <head>
+    
     <meta charset="UTF-8">
     <title>{{setting('app_name')}} | {{setting('app_short_description')}}</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
@@ -8,7 +9,9 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/f665ff0f86.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{asset('plugins/font-awesome/css/font-awesome.min.css')}}">
+    <link href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css"/>
 
     <!-- Ionicons -->
 {{--<link href="https://unpkg.com/ionicons@4.1.2/dist/css/ionicons.min.css" rel="stylesheet">--}}
@@ -161,9 +164,11 @@
 
     @endrole
 
-
+    
     <!-- jQuery -->
     <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
+    <script src="https://unpkg.com/jquery@2.2.4/dist/jquery.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
     {{--<script src="{{asset('https://code.jquery.com/ui/1.12.1/jquery-ui.min.js')}}"></script>--}}
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -234,8 +239,9 @@
                 }
             });
         }
-    </script>
 
+     
+    </script>
     <!-- Sparkline -->
     {{--<script src="{{asset('plugins/sparkline/jquery.sparkline.min.js')}}"></script>--}}
     {{--<!-- iCheck -->--}}

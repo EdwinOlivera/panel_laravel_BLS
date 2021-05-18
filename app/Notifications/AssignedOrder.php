@@ -57,15 +57,16 @@ class AssignedOrder extends Notification
     {
         $message = new FcmMessage();
         $notification = [
-            'title' => "Order #" . $this->order->id . " de " . $this->order->user->name ." Se le ha asignado a usted",
-            'text'         => $this->order->productOrders[0]->product->market->name,
+            'title' => "Order #" . $this->order->id . " de " . $this->order->productOrders[0]->product->market->name . " Se te asigno",
+            'text' => $this->order->productOrders[0]->product->name,
             'image' => $this->order->productOrders[0]->product->market->getFirstMediaUrl('image', 'thumb'),
             'icon' => $this->order->productOrders[0]->product->market->getFirstMediaUrl('image', 'thumb'),
         ];
         $data = [
             'click_action' => "FLUTTER_NOTIFICATION_CLICK",
-            'id' => '1',
+            'id' => 'Pedidos',
             'status' => 'done',
+            'current_order_id' => $this->order->id,
             'message' => $notification,
         ];
         $message->content($notification)->data($data)->priority(FcmMessage::PRIORITY_HIGH);
@@ -82,6 +83,7 @@ class AssignedOrder extends Notification
     public function toArray($notifiable)
     {
         return [
+            'current_order_id' => $this->order->id,
             'order_id' => $this->order['id'],
         ];
     }

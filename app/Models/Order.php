@@ -50,10 +50,24 @@ class Order extends Model
         'hora_entrega',
         'descripcion',
         'order_number_fac',
+        'extra_amount',
+        'fecha_creacion',
+        'mapa_fechas_cambio',
         'enable_factura',
         'nombre_user',
+        'id_factura',
+        'accepted',
+        'rejected',
+        'instructionGeneral',
+        'instructionProduct',
         'rtn_user',
-        'extra_amount',
+        'driver_accept',
+        'driver_array',
+        'explanatory_message',
+        'cancel_by_user',
+        'nobody_accepted',
+        'discount',
+
     ];
 
     /**
@@ -63,7 +77,9 @@ class Order extends Model
      */
     protected $casts = [
         'enable_factura' => 'boolean',
-
+        'accepted' => 'boolean',
+        'rejected' => 'boolean',
+        'driver_accept' => 'boolean',
         'user_id' => 'integer',
         'order_status_id' => 'integer',
         'tax' => 'double',
@@ -80,6 +96,9 @@ class Order extends Model
         'active' => 'boolean',
         'extra_amount' => 'double',
         'driver_id' => 'integer',
+        'cancel_by_user' => "boolean",
+        'nobody_accepted' => "boolean",
+        'discount' => 'double',
     ];
 
     /**
@@ -161,6 +180,14 @@ class Order extends Model
     public function products()
     {
         return $this->belongsToMany(\App\Models\Product::class, 'product_orders');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     **/
+    public function carts()
+    {
+        return $this->belongsToMany(\App\Models\Cart::class, 'carts_order');
     }
 
     /**

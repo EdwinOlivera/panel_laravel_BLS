@@ -134,19 +134,19 @@ class ProductDataTable extends DataTable
                 'title' => trans('lang.product_price'),
 
             ],
-            [
-                'data' => 'discount_price',
-                'title' => trans('lang.product_discount_price'),
+            // [
+            //     'data' => 'discount_price',
+            //     'title' => trans('lang.product_discount_price'),
 
-            ],
-            [
-                'data' => 'capacity',
-                'title' => trans('lang.product_capacity'),
+            // ],
+            // [
+            //     'data' => 'capacity',
+            //     'title' => trans('lang.product_capacity'),
 
-            ],
+            // ],
             [
                 'data' => 'featured',
-                'title' => trans('lang.product_featured'),
+                'title' => trans('Disponible'),
 
             ],
             [

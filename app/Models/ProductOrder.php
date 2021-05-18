@@ -28,7 +28,8 @@ class ProductOrder extends Model
         'price',
         'quantity',
         'product_id',
-        'order_id'
+        'order_id',
+        'unique_identify'
     ];
 
     /**
@@ -40,7 +41,8 @@ class ProductOrder extends Model
         'price' => 'double',
         'quantity' => 'integer',
         'product_id' => 'integer',
-        'order_id' => 'integer'
+        'order_id' => 'integer',
+        'unique_identify' => 'integer'
     ];
 
     /**
@@ -94,11 +96,20 @@ class ProductOrder extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      **/
+    public function optiongroups()
+    {
+        return $this->belongsToMany(\App\Models\OptionGroup::class, 'product_order_options');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     **/
     public function options()
     {
         return $this->belongsToMany(\App\Models\Option::class, 'product_order_options');
     }
 
+    
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
@@ -106,11 +117,5 @@ class ProductOrder extends Model
     {
         return $this->belongsTo(\App\Models\Order::class, 'order_id', 'id');
     }
-//        /**
-//    * @return \Illuminate\Database\Eloquent\Collection
-//    */
-//    public function getOptionsAttribute()
-//    {
-//        return $this->options()->get(['options.id', 'options.name']);
-//    }
+
 }

@@ -252,7 +252,6 @@ class UserAPIController extends Controller
             $this->userRepository->pushCriteria(new LimitOffsetCriteria($request));
             $this->userRepository->pushCriteria(new DriversOfMarketCriteria($id));
             $users = $this->userRepository->all();
-
         } catch (RepositoryException $e) {
             return $this->sendError($e->getMessage());
         }

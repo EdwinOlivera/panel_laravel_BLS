@@ -41,6 +41,12 @@ class EncargoRepository extends BaseRepository
         'monto',
         'pagada',
         'distancia_puntos',
+        'nombre_mandadito',
+        'tel_movil_mandadito',
+        'direccion_mandadito',
+        'nombre_mandadito_b',
+        'tel_movil_mandadito_b',
+        'direccion_mandadito_b',
         'pay_mode',
     ];
 

@@ -84,7 +84,7 @@ class AppSettingController extends Controller
             }, $input);
 
             setting($input)->save();
-            Flash::success(trans('lang.app_setting_global') . ' updated successfully.');
+            Flash::success(trans('lang.app_setting_global') . ' Actualizdos exitosamente.');
             Artisan::call("config:clear");
         } else {
             Flash::warning('Esta app solo es una demo, no puede modifcar esta sección ');

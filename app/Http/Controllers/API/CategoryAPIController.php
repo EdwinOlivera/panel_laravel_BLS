@@ -9,14 +9,14 @@
 
 namespace App\Http\Controllers\API;
 
-
 use App\Criteria\Categories\CategoriesOfFieldsCriteria;
 use App\Criteria\Categories\CategoriesOfMarketCriteria;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Repositories\CategoryRepository;
-use Flash;
+use App\Repositories\MarketRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use InfyOm\Generator\Criteria\LimitOffsetCriteria;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Prettus\Repository\Exceptions\RepositoryException;
@@ -29,10 +29,13 @@ class CategoryAPIController extends Controller
 {
     /** @var  CategoryRepository */
     private $categoryRepository;
+    /** @var  MarketRepository */
+    private $marketRepository;
 
-    public function __construct(CategoryRepository $categoryRepo)
+    public function __construct(CategoryRepository $categoryRepo, MarketRepository $marketRepo)
     {
         $this->categoryRepository = $categoryRepo;
+        $this->marketRepository = $marketRepo;
     }
 
     /**
@@ -44,7 +47,8 @@ class CategoryAPIController extends Controller
      */
     public function index(Request $request)
     {
-        try{
+
+        try {
             $this->categoryRepository->pushCriteria(new RequestCriteria($request));
             $this->categoryRepository->pushCriteria(new LimitOffsetCriteria($request));
             $this->categoryRepository->pushCriteria(new CategoriesOfFieldsCriteria($request));
@@ -54,7 +58,7 @@ class CategoryAPIController extends Controller
         }
         $categories = $this->categoryRepository->all();
 
-        return $this->sendResponse($categories->toArray(), 'Categories retrieved successfully');
+        return $this->sendResponse($categories->toArray(), 'Categories Conseguidas successfully');
     }
 
     /**
@@ -77,5 +81,41 @@ class CategoryAPIController extends Controller
         }
 
         return $this->sendResponse($category->toArray(), 'Category retrieved successfully');
+    }
+
+    public function getCategoriesMarket($id)
+    {
+
+        $market = $this->marketRepository->findWithoutFail($id);
+        $categoriesFinal = [];
+
+        if (!empty($market)) {
+            $category = $this->categoryRepository->findWithoutFail('4');
+
+            $categories = $market->categoriesProducts()->orderBy('sort_id', 'asc')->get();
+            $checkActiveCategory = DB::table('categoriesproducts')->where('market_id', $id)->pluck('active', 'category_id')->toArray();
+            foreach ($categories as $category) {
+                if ($category->active) {
+
+                    if ($checkActiveCategory[$category->id]) {
+                        $categoriesFinal[] = $category;
+                    }
+
+                }
+            }
+            $algo = [];
+            $products = [];
+            foreach ($categoriesFinal as $categoryFinal) {
+                
+                $products = $categoryFinal->products()->where('featured', '=', '1')->where('market_id', '=', $id)->orderBy('sort_id', 'asc')->get(['id', 'name', 'price', 'discount_price', 'description', 'deliverable', 'featured', 'market_id']);
+                foreach($products as $product){
+                    $product->category_id = $categoryFinal->id; 
+                }
+                $categoryFinal['products'] = $products;
+            }
+
+        }
+
+        return $this->sendResponse($categoriesFinal, 'Categories Conseguidas successfully');
     }
 }

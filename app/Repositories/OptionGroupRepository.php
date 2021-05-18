@@ -20,7 +20,10 @@ class OptionGroupRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
-        'name'
+        'name',
+        'id_producto',
+        'name_admin',
+
     ];
 
     /**

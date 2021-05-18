@@ -53,7 +53,7 @@
       </ul>
     </div>
     <div class="card-body">
-      {!! Form::model($option, ['route' => ['options.update', $option->id], 'method' => 'patch']) !!}
+      {!! Form::model($option, ['route' => ['options.update', $option->id], 'method' => 'patch', 'id'=>'option_fields']) !!}
       <div class="row">
         @include('options.fields')
       </div>
@@ -77,4 +77,5 @@
     Dropzone.autoDiscover = false;
     var dropzoneFields = [];
 </script>
+
 @endpush

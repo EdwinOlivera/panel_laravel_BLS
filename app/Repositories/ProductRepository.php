@@ -41,7 +41,7 @@ class ProductRepository extends BaseRepository implements CacheableInterface
         'unit',
         'featured',
         'market_id',
-        'category_id'
+        'category_id',
     ];
 
     /**
@@ -65,9 +65,9 @@ class ProductRepository extends BaseRepository implements CacheableInterface
     {
         $products = [];
         foreach ($this->all() as $model) {
-            if(!empty($model->market)){
-            $products[$model->market->name][$model->id] = $model->name;
-        }
+            if (!empty($model->market)) {
+                $products[$model->market->name][$model->id] = $model->name;
+            }
         }
         return $products;
     }

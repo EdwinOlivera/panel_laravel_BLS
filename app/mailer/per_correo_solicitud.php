@@ -183,12 +183,12 @@ $mail->SMTPAuth = true;                               // Enable SMTP authenticat
 $mail->SMTPSecure = 'ssl'; 
 $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
 $mail->Port = 465;  
-$mail->Username = 'cientificayposgrado.unah.inpos@gmail.com';                 // SMTP username
-$mail->Password = 'INPOS.C0rre0.UNAH';                           // SMTP password
+$mail->Username = 'test@bluelionsoft.com';                 // SMTP username
+$mail->Password = 'Bls_t3st_20!7';                           // SMTP password
                          // Enable encryption, 'ssl' also accepted
 
-$mail->From = 'cientificayposgrado.unah.inpos@gmail.com';
-$mail->FromName = 'Sistema Web DICyP';
+$mail->From = 'bls@email.com';
+$mail->FromName = 'Blue Lion Soft';
 $mail->addAddress($USUARIOS[0]['email'],$USUARIOS[0]['primer_nombre'].' '.$USUARIOS[0]['primer_apellido']);     // Add a recipient
 
 $mail->isHTML(true);                                  // Set email format to HTML

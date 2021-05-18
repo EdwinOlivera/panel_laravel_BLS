@@ -13,6 +13,17 @@
   </div>
 </div>
 
+<!-- index_relevance -->
+<div class="form-group row ">
+  {!! Form::label('index_relevance', trans("Indice de relevancia"), ['class' => 'col-3 control-label text-right']) !!}
+  <div class="col-9">
+    {!! Form::number('index_relevance', null,  ['class' => 'form-control',"min = 0",'step'=>'any','placeholder'=>  trans("lang.distance_per_extra_placeholder")]) !!}
+    <div class="form-text text-muted">
+      {{ trans("El numero de importancia que tendra la categoria en la pantalla principal. 0 = El más importante, 1 = El segundo más importante") }}
+    </div>
+  </div>
+</div>
+
 <!-- Description Field -->
 <div class="form-group row ">
   {!! Form::label('description', trans("lang.field_description"), ['class' => 'col-3 control-label text-right']) !!}
@@ -22,6 +33,39 @@
     <div class="form-text text-muted">{{ trans("lang.field_description_help") }}</div>
   </div>
 </div>
+
+<!-- Message Field -->
+<div class="form-group row ">
+  {!! Form::label('message', trans("Mensaje de saludo"), ['class' => 'col-3 control-label text-right']) !!}
+  <div class="col-9">
+    {!! Form::text('message', null, ['class' => 'form-control','placeholder'=>
+     trans("¿Qué deseas comer hoy?")  ]) !!}
+    <div class="form-text text-muted">{{ trans("Este mensaje se mostrara en la parte superior cuando se entra la categoria") }}</div>
+  </div>
+</div>
+
+<!-- 'Boolean active Field' -->
+<div class="form-group row ">
+  {!! Form::label('active', trans("Activa"),['class' => 'col-3 control-label text-right']) !!}
+  <div class="checkbox icheck">
+      <label class=" ml-2 form-check-inline">
+          {!! Form::hidden('active', 0) !!}
+          {!! Form::checkbox('active', 1, null) !!}
+          
+          {!! Form::label('active_hide', trans("Habilita/deshabilitar la categoria"),['class' => ' text-left pl-3']) !!}
+        </label>
+  </div>
+</div>
+<!-- Message Closes Field -->
+<div class="form-group row ">
+  {!! Form::label('message_closed', trans("Aviso"), ['class' => 'col-3 control-label text-right']) !!}
+  <div class="col-9">
+    {!! Form::text('message_closed', null, ['class' => 'form-control','placeholder'=>
+     trans("Actualmente no esta disponible esta categoria")  ]) !!}
+    <div class="form-text text-muted">{{ trans("Este mensaje se mostrara cuando la categoria este cerrada") }}</div>
+  </div>
+</div>
+
 </div>
 <div style="flex: 50%;max-width: 50%;padding: 0 4px;" class="column">
 
@@ -91,7 +135,6 @@
     <div class="form-text text-muted">{{ trans("lang.field_markets_help") }}</div>
   </div>
 </div>
-
 </div>
 @if($customFields)
 <div class="clearfix"></div>

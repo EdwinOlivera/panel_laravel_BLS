@@ -9,18 +9,13 @@
 
 namespace App\Http\Controllers\API\Manager;
 
-
-use App\Criteria\Markets\ActiveCriteria;
-use App\Criteria\Markets\MarketsOfFieldsCriteria;
 use App\Criteria\Markets\MarketsOfManagerCriteria;
 use App\Criteria\Markets\NearCriteria;
-use App\Criteria\Markets\PopularCriteria;
 use App\Http\Controllers\Controller;
 use App\Models\Market;
 use App\Repositories\CustomFieldRepository;
 use App\Repositories\MarketRepository;
 use App\Repositories\UploadRepository;
-use Flash;
 use Illuminate\Http\Request;
 use InfyOm\Generator\Criteria\LimitOffsetCriteria;
 use Prettus\Repository\Criteria\RequestCriteria;
@@ -47,7 +42,6 @@ class MarketAPIController extends Controller
      */
     private $uploadRepository;
 
-
     public function __construct(MarketRepository $marketRepo, CustomFieldRepository $customFieldRepo, UploadRepository $uploadRepo)
     {
         parent::__construct();
@@ -66,17 +60,17 @@ class MarketAPIController extends Controller
      */
     public function index(Request $request)
     {
-        try{
+        try {
             $this->marketRepository->pushCriteria(new RequestCriteria($request));
             $this->marketRepository->pushCriteria(new LimitOffsetCriteria($request));
             $this->marketRepository->pushCriteria(new MarketsOfManagerCriteria(auth()->id()));
             //$this->marketRepository->pushCriteria(new MarketsOfFieldsCriteria($request));
-//            if ($request->has('popular')) {
-//                $this->marketRepository->pushCriteria(new PopularCriteria($request));
-//            } else {
-//                $this->marketRepository->pushCriteria(new NearCriteria($request));
-//            }
-//            $this->marketRepository->pushCriteria(new ActiveCriteria());
+            //            if ($request->has('popular')) {
+            //                $this->marketRepository->pushCriteria(new PopularCriteria($request));
+            //            } else {
+            //                $this->marketRepository->pushCriteria(new NearCriteria($request));
+            //            }
+            //            $this->marketRepository->pushCriteria(new ActiveCriteria());
             $markets = $this->marketRepository->all();
 
         } catch (RepositoryException $e) {
@@ -98,7 +92,7 @@ class MarketAPIController extends Controller
     {
         /** @var Market $market */
         if (!empty($this->marketRepository)) {
-            try{
+            try {
                 $this->marketRepository->pushCriteria(new RequestCriteria($request));
                 $this->marketRepository->pushCriteria(new LimitOffsetCriteria($request));
                 if ($request->has(['myLon', 'myLat', 'areaLon', 'areaLat'])) {
@@ -127,7 +121,7 @@ class MarketAPIController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        if (auth()->user()->hasRole('manager')){
+        if (auth()->user()->hasRole('manager')) {
             $input['users'] = [auth()->id()];
         }
         $customFields = $this->customFieldRepository->findByField('custom_field_model', $this->marketRepository->model());
@@ -143,7 +137,7 @@ class MarketAPIController extends Controller
             return $this->sendError($e->getMessage());
         }
 
-        return $this->sendResponse($market->toArray(),__('lang.saved_successfully', ['operator' => __('lang.market')]));
+        return $this->sendResponse($market->toArray(), __('lang.saved_successfully', ['operator' => __('lang.market')]));
     }
 
     /**
@@ -156,8 +150,8 @@ class MarketAPIController extends Controller
      */
     public function update($id, Request $request)
     {
-        $market = $this->marketRepository->findWithoutFail($id);
 
+        $market = $this->marketRepository->findWithoutFail($id);
         if (empty($market)) {
             return $this->sendError('Market not found');
         }
@@ -180,7 +174,7 @@ class MarketAPIController extends Controller
             return $this->sendError($e->getMessage());
         }
 
-        return $this->sendResponse($market->toArray(),__('lang.updated_successfully', ['operator' => __('lang.market')]));
+        return $this->sendResponse($market->toArray(), __('lang.updated_successfully', ['operator' => __('lang.market')]));
     }
 
     /**
@@ -200,6 +194,6 @@ class MarketAPIController extends Controller
 
         $market = $this->marketRepository->delete($id);
 
-        return $this->sendResponse($market,__('lang.deleted_successfully', ['operator' => __('lang.market')]));
+        return $this->sendResponse($market, __('lang.deleted_successfully', ['operator' => __('lang.market')]));
     }
 }

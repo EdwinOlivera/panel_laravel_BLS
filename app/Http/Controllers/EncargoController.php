@@ -97,7 +97,11 @@ class EncargoController extends Controller
        
      
         $encargo_setting = DB::table('encargos_settings')->get();
-        $encargo_setting = $encargo_setting[0];
+        if($encargo_setting[0] && isset($encargo_setting[0])){
+
+            $encargo_setting = $encargo_setting[0];
+        }
+        
         return view('encargos.create')->with("encargo_setting", $encargo_setting);
         // return $encargo_setting;
     }
@@ -139,7 +143,7 @@ class EncargoController extends Controller
 
     public function show(ProductEncargoDataTable $ProductEncargoDataTable, $id)
     {
-        //Funcion sin tocar
+        //Funcion sin Modificar de la origina de Order
         $this->EncargoRepository->pushCriteria(new EncargosOfUserCriteria(auth()->id()));
         $encargo = $this->EncargoRepository->findWithoutFail($id);
         if (empty($encargo)) {

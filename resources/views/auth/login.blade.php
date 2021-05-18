@@ -32,14 +32,14 @@
                 </div>
 
                 <div class="row mb-2">
-                    <div class="col-8">
+                    <div class="col-7">
                         <div class="checkbox icheck">
                             <label> <input type="checkbox" name="remember"> {{__('auth.remember_me')}}
                             </label>
                         </div>
                     </div>
                     <!-- /.col -->
-                    <div class="col-4">
+                    <div class="col-5">
                         <button type="submit" class="btn btn-primary btn-block">{{__('auth.login')}}</button>
                     </div>
                     <!-- /.col -->

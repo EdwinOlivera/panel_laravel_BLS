@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers\API;
 
-
+use App\Http\Controllers\Controller;
 use App\Models\Field;
 use App\Repositories\FieldRepository;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Response;
 use InfyOm\Generator\Criteria\LimitOffsetCriteria;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Illuminate\Support\Facades\Response;
 use Prettus\Repository\Exceptions\RepositoryException;
-use Flash;
 
 /**
  * Class FieldController
@@ -22,6 +20,7 @@ class FieldAPIController extends Controller
 {
     /** @var  FieldRepository */
     private $fieldRepository;
+
 
     public function __construct(FieldRepository $fieldRepo)
     {
@@ -37,7 +36,7 @@ class FieldAPIController extends Controller
      */
     public function index(Request $request)
     {
-        try{
+        try {
             $this->fieldRepository->pushCriteria(new RequestCriteria($request));
             $this->fieldRepository->pushCriteria(new LimitOffsetCriteria($request));
         } catch (RepositoryException $e) {

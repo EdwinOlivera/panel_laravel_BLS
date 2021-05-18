@@ -32,6 +32,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Response;
 use Prettus\Validator\Exceptions\ValidatorException;
+use Carbon\Carbon;
 
 class OrderController extends Controller
 {
@@ -214,6 +215,17 @@ class OrderController extends Controller
         }
         $oldStatus = $oldOrder->payment->status;
         $input = $request->all();
+
+        // El añadir hora de actualizacion a la orden perjudica las demas oras, son incompatibles
+        // Hace falta ver como hacer compatibles el formato de las horas y la codificacion de los json
+//   $actualizacionHora  =      explode(',', ($input['mapa_fechas_cambio']));
+//   order_status_id
+//   Carbon::now()->format('h:i a');
+//   return sizeof($actualizacionHora);
+//   $actualizacionHora[$input['order_status_id']] = Carbon::now()->format('h:i a') ;
+//   return $actualizacionHora;
+
+    //  $input['mapa_fechas_cambio']= json_encode($actualizacionHora);
         $customFields = $this->customFieldRepository->findByField('custom_field_model', $this->orderRepository->model());
         try {
 
